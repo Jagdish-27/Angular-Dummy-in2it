@@ -1,0 +1,72 @@
+<form  [formGroup]="task_form" class="container" #scrollToTop>
+    <div class="div" style="display: flex; justify-content: space-between;">
+      <h3 style="color: #0a58ca; text-align: center;">Add My Task</h3>
+    <i-feather style="cursor: pointer; color: red; width: 2rem;" name="x" (click)="closeSideForm()"></i-feather>
+    </div>
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Id</label>
+has context menu
+      <div class="box">
+        <input type="text" formControlName="id" class="form-control" name="id">
+        <button [disabled]="item" class="btn-generate" (click)="generateUniqueId()">Generate Id</button>
+      </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Solution Area</label>
+        <input formControlName="solutionArea" type="text" class="form-control" name="area">
+          <div class="error-box" *ngIf="task_form.get('solutionArea')?.invalid && task_form.get('solutionArea')?.touched">
+          </div>
+          <div class="error-box" *ngIf="task_form.get('solutionArea')?.invalid && task_form.get('solutionArea')?.touched">
+            <span style="color: red;" *ngIf="task_form.get('solutionArea')?.errors?.['required']">This Field is Required</span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Workflow</label>
+        <input formControlName="workflow" type="text" class="form-control" name="workflow">
+        
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Task Id</label>
+      <input formControlName="taskId" type="text" class="form-control" id="taskid">
+      <div style="color: red;"  *ngIf="task_form.get('taskId')?.hasError('noSpace')  && task_form.get('taskId')?.touched">
+        Cannot contain spaces
+      </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Task</label>
+        <input formControlName="task" type="text" class="form-control" id="taskid">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Status</label>
+        <select formControlName="status" class="form-select" aria-label="Default select example">
+            <option value="">Open this select menu</option>
+            <option value="active">Active</option>
+            <option value="inactive">InActive</option>
+            <option value="inprogress">InProgress</option>
+          </select>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Start Date</label>
+        <input [min]="date" formControlName="startDate" type="date" class="form-control" id="taskid">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Due Data</label>
+        <input [min]="date" formControlName="dueDate" type="date" class="form-control" id="taskid">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Priority</label>
+        <select formControlName="priority" class="form-select" aria-label="Default select example">
+          <option value="">Open this select menu</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+       
+    <div class="btns">
+        <button type="submit"   (click)="onForm_Submit()" class="btn btn-primary">{{ isEditable ? 'Update' :'Submit'}}</button>
+        <button type="button" (click)="onClear_click" class="btn btn-primary">Clear</button>
+    </div>
+  </form>
+  <!-- [disabled]="!task_form.valid" -->

@@ -1,0 +1,166 @@
+
+
+@import '../../../../../styles.css';
+
+.table_head{
+    background-color: grey!important;
+    color: white!important;
+}
+
+.form_list_container{
+    display: flex;
+    width: 100%;
+    height: 65%;
+}
+ 
+.profile-box{
+    overflow-y: scroll;
+    transition: width 0.4s ease-in-out;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1rem;
+    align-items: start;
+    /* box-shadow: -1px -1px 10px -1.5px grey; */
+    border: 1px solid gainsboro;
+}
+ 
+.form_{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1rem;
+    align-items: start;
+    width: 100%;
+    padding: 1rem 1rem;
+}
+ 
+.form_ .profile_row{
+    padding: 0.5rem 1rem;
+}
+ 
+.form_ .profile_row .icon-text-box{
+    display: flex;
+    grid-gap: 1rem;
+    align-items: center;
+}
+.form_ .profile_row .icon-text-box .icon{
+    width: 55px;
+    height: 55px;
+    color: blue;
+}
+ 
+.form_ .eml_ph_row{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    grid-gap: 0.5rem;
+}
+ 
+.form_ .role_row{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    grid-gap: 0.5rem;
+ 
+}
+ h2{
+    font-size: 16px;
+}
+ span{
+    font-size: 14px;
+}
+ 
+.close-button{
+    padding: 0.5rem 1rem;
+    background-color: blue;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+}
+ 
+.text-blue{
+    color: blue;
+    text-decoration: 1px solid blue;
+    cursor: pointer;
+}
+ 
+.list_container{
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+ 
+.list_container .row_decide_box{
+    display: flex;
+    align-items: center;
+    grid-gap: 0.5rem;
+    padding: 1rem 2rem;
+    /* border-bottom: 1px solid grey; */
+    /* padding-bottom: 1rem; */
+}
+ 
+.list_container .row_decide_box span{
+    font-size: 18px;
+}
+ 
+.list_container .row_decide_box input{
+    width: 4rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 14px;
+}
+ 
+.list_container .list_box{
+    height: 70%;
+    overflow: scroll;
+    margin: 1rem 2rem;
+}
+ 
+/* table{
+    width: 100%;
+} */
+ 
+th,td{
+    /* border-bottom: 1px solid grey; */
+    padding: 1rem;
+    text-align: start;
+}
+ 
+ 
+.pagination_btn_box{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    grid-gap: 0.5rem;
+    padding-right: 2rem;
+}
+ 
+.pagination_btn_box input{
+    width: 4rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 14px;
+}
+
+.contact_list{
+    display: flex;
+}
+/* 
+.table{
+    width: 75%;
+} */
+
+.profile-box{
+    width: 25%;
+}
+
+.name_link{
+    color: blue!important;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.manage_table{
+    height: 100%;
+    overflow: scroll;
+}

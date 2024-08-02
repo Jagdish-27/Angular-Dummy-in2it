@@ -1,0 +1,59 @@
+
+<div style="padding: 1rem;" class="left">
+    <span>show</span>
+    <select>
+      <option value="5">Select</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+    </select>
+    <span>Rows | 1 to 10 of 55 Entries</span>
+  </div>
+<section class="contacs">
+    <div class="contact_list">
+        <div class="manage_table" [ngStyle]="{width: !isActiveForm ? '100%':'75%', transition:'all 0.3s'}">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th scope="col"><input style="margin-right: 0.5rem;" type="checkbox">Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let contact of contactDetailData.contacs">
+                <tr style="cursor: pointer;"  (click)="onRowClick(contact)">
+                    <th (click)="onNameClick()" class="name_link" scope="row"><input style="margin-right: 0.5rem;" type="checkbox">{{contact.firstName}}</th>
+                    <td>{{contact.role}}</td>
+                    <td>{{contact.email}}</td>
+                    <td>{{contact.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <div [ngStyle]="{width: isActiveForm ? '25%':'0%', transition:'all 0.3s'}" class="profile-box">
+
+
+            <div class="form_">
+                <div class="profile_row">
+                    <div class="icon-text-box">
+                        <i-feather name="user" class="icon"></i-feather>
+                        <div class="text">
+                            <h2 >{{rowData.firstName}}</h2>
+                            <span>Organization : {{contactDetailData.organization}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="eml_ph_row">
+                    <span>email : {{rowData.email}}</span>
+                    <span>phone : {{rowData.phone}}</span>
+                </div>
+                <div class="role_row">
+                    <span>role : {{rowData.role}}</span>
+                    <span>additional : no addional role</span>
+                </div>
+
+                <button (click)="closeSideForm()" class="close-button">Close</button>
+            </div>
+        </div>
+    </div>
+</section>

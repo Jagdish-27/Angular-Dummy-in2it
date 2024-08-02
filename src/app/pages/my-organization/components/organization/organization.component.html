@@ -1,0 +1,78 @@
+<app-nav-tab ></app-nav-tab>
+<main class="main_container">
+  <div class="list">
+    <div class="items">
+    <div class="up_record">
+      <p>Lists</p>
+      <div [class.active]="currentActiveVal == ''" class="org">
+        <h6  (click)="filterOrganization('')">All Organizations</h6>
+        <p>{{totalItems}} organization</p>
+      </div>
+    </div>
+    <div class="down_record" >
+      <input  (keyup)="onSideBarSearchValue($event)" type="text" placeholder="Search">
+      
+      <div [class.active]="currentActiveVal == item.name" *ngFor="let item of searchObjListFiltered"  class="text">
+        <p  (click)="filterOrganization(item.name)"  class="first">{{item.name}}</p>
+        <p >{{item.name == 'Customer' ? customerCount:nonCustomerCount }} organizations</p>
+      </div>
+      <!-- <div [class.active]="currentActiveVal == 'Non Customer'" class="text">
+        <p (click)="filterOrganization('Non Customer')" class="first">Non Customers</p>
+        <p>{{nonCustomerCount}} organizations</p>
+      </div> -->
+    </div>
+  </div>
+  </div>
+  <div class="all_org_list">
+    <div class="org-head">
+      <div class="left">
+        <h4>All Organizations List</h4>
+      </div>
+      <div class="right">
+        <input (keyup)="onSearchValue($event)" type="text" placeholder="Search">
+        <i-feather name="settings"></i-feather>
+      </div>
+    </div>
+
+    <div class="table table-striped">
+      <div class="left" style="padding: 1rem 0;">
+        <span>show</span>
+        <select>
+          <option value="5">Select</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+        </select>
+        <span>Rows | 1 to 10 of 55 Entries</span>
+      </div>
+      <table class="table">
+        <thead>
+          <tr >
+            <th cl scope="col">Organization</th>
+            <th scope="col">Type</th>
+            <th scope="col">Industry</th>
+            <th scope="col">Onboarding</th>
+            <th scope="col">Related Orgs</th>
+            <th scope="col">Products</th>
+            <th scope="col">Org SPOC</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of filteredData">
+            <td ><a (click)="organizationClicked(data)" class="org_link">{{data.organization}}</a></td>
+            <td>{{data.type}}</td>
+            <td>{{data.industry}}</td>
+            <td>{{data.onboarding}}</td>
+            <td>{{data.relatedOrgs.length}}</td>
+            <td>{{data.products.length}}</td>
+            <td>{{data.orgSPOC}}</td>
+            <td>{{data.contacs[0].email}}</td>
+            <td>{{data.contacs[0].phone}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>

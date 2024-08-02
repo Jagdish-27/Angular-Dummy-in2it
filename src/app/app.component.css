@@ -1,0 +1,15 @@
+.sidebar_layout{
+    display: flex;
+    height: 93vh;
+    width: 100vw;
+}
+ 
+.app_layout{
+    width: 100%;
+}
+ 
+.lod_component{
+    width: 100vw;
+    height: 91vh;
+}
+ 

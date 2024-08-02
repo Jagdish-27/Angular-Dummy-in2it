@@ -1,0 +1,44 @@
+.nav{
+    height: 100vh;
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-top: 1rem;
+    border-right: 4px solid gainsboro;
+}
+.ham{
+    /* margin-left: 8rem; */
+}
+
+.side_nav_open{
+    background: whitesmoke;
+    width: 300px;
+    transition: all 0.3s ease-in-out;
+}
+
+.side_nav_close{
+    width: 38px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+.list_items{
+    width: 200px;
+}
+.hover{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.active{
+    color: purple;
+}
+
+.wrapper{
+    width: auto;
+}
+.close_wrap{
+    width: 0;
+    overflow: hidden;
+}

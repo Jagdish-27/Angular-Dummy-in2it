@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.overlay{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: transparent;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-size: 1.6rem;
+    margin-bottom: 0;
+}
+
+p{
+    margin-bottom: 0!important;
+}
+
+.disabled{
+    color: grey!important;
+    background: #e9e7e7;
+    border-radius: 6px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}

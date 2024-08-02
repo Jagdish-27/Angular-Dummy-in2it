@@ -1,0 +1,11 @@
+<section  class="cards">
+   <div *ngFor="let item of dataArr" class="card" [ngClass]="default_name == item.name ? 'active':''" (click)="onCardClick(item.name)">
+      <div class="left">
+         <p >{{item.name}}</p>
+         <p class="text">{{item.count}}</p>
+      </div>
+      <div class="right">
+         <i-feather class="icon" [name]="item.icon"></i-feather>
+      </div>
+   </div>
+</section>

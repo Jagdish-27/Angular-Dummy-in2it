@@ -1,0 +1,102 @@
+<app-nav-tab></app-nav-tab>
+<div class="organizationData-container">
+    <div class="heading-row">
+        <div class="heading-data-box">
+            <div class="data-box">
+                <h1>In2It Test Org</h1>
+                <h2>parent Organization <span>with {{activeOrgData.parentOrganizations.length}} Related Organization(s)</span></h2>
+                <span>Registration number : {{activeOrgData.registrationNumber}}</span>
+            </div>
+            <div class="data-box">
+                <h2>Industry : <span>{{activeOrgData.industry}}</span></h2>
+                <h2>description : <span>{{activeOrgData.description}}</span></h2>
+            </div>
+            <div class="data-box">
+                <h2>Cluster : <span>{{activeOrgData.cluster}}</span></h2>
+                <h2>Tier : <span>{{activeOrgData.tier}}</span></h2>
+            </div>
+            <div class="data-box">
+                <div class="icon-data-box">
+                    <i-feather name="map-pin"></i-feather>
+                    <span>{{activeOrgData.address}}</span>
+                </div>
+            </div>
+            <div class="data-box">
+                <div class="icon-data-box">
+                    <i-feather name="user"></i-feather>
+                    <h1 style="font-size: 16px;">{{activeOrgData.contacs[0].firstName}}</h1>
+                    <div class="role">{{activeOrgData.orgSPOC}}</div>
+                </div>
+                <span>Email: {{activeOrgData.contacs[0].email}}</span>
+                <span>phone: {{activeOrgData.contacs[0].phone}}</span>
+            </div>
+ 
+        </div>
+        <div class="edit-icon-box">
+            <i-feather name="edit"></i-feather>
+        </div>
+ 
+    </div>
+
+    <div class="main-row">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+                <a ngbNavLink>General Overview</a>
+                <ng-template ngbNavContent>
+                    <app-general-overview></app-general-overview>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink>Invoices & reports</a>
+                <ng-template ngbNavContent>
+                    <p>
+                        Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
+                        farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+                        ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
+                        helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
+                        8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+                        stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
+                    </p>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+                <a ngbNavLink>Requests</a>
+                <ng-template ngbNavContent>
+                    <p>
+                        Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi.
+                        Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio.
+                        Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna,
+                        egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec
+                        tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et
+                        magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget
+                        neque. Phasellus nec tortor vel tellus pulvinar feugiat.
+                    </p>
+                </ng-template>
+            </li>
+ 
+            <li [ngbNavItem]="4">
+                <a ngbNavLink>Reports</a>
+                <ng-template ngbNavContent>
+                    <p>
+                        Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi.
+                        Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio.
+                        Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna,
+                        egestas ut ipsum vel, volutpat volutpat neque.
+                    </p>
+                </ng-template>
+            </li>
+ 
+            <li [ngbNavItem]="5">
+                <a ngbNavLink>Contacts</a>
+                <ng-template ngbNavContent>
+                    <app-org-contacs [contactDetailData]="activeOrgData"></app-org-contacs>
+                </ng-template>
+            </li>
+        </ul>
+        
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+       
+    </div>
+ 
+</div>
+ 

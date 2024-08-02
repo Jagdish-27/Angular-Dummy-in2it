@@ -1,0 +1,37 @@
+<!-- <section [ngClass]="[menu1 ? 'class1' : '',  menu2 ? 'class1' : '', (something && (menu1 || menu2)) ? 'class2' : '']"> -->
+
+<nav class="nav " [ngClass]="[sideNavOpen ? 'side_nav_open':'side_nav_close']">
+    <i-feather style="cursor: pointer;" name="align-justify" class="ham" (click)="onIconClick()"></i-feather>
+    <div [ngStyle]="{'width': !sideNavOpen ? '0' : 'auto'}" class="wrapper">
+    <div  class="list_items">
+        <div class="tab">
+            <h4>My Menu</h4>
+            <ul *ngFor="let myMenu_item of nav_list_data.my_menu" class="home_menu hover">
+                <li (click)="emitRoutes(myMenu_item,'My Menu')" routerLinkActive="active" [routerLink]="'my-menu/'+myMenu_item.replace(' ','-').toLocaleLowerCase()">
+                    <i-feather [name]="iconMappings[myMenu_item]"></i-feather>{{myMenu_item}}</li>
+            </ul>
+        </div>
+        <div class="tab">
+            <h4 >My Organization</h4>
+            <ul *ngFor="let org_item of nav_list_data.my_organization" class="org_menu hover">
+                <li (click)="emitRoutes(org_item,'My Organization')" routerLinkActive="active" [routerLink]="'my-organization/'+org_item.replace(' ','-').toLocaleLowerCase()">
+                    <i-feather [name]="iconMappings[org_item]"></i-feather>{{org_item}}</li>
+            </ul>
+        </div>
+        <div class="tab">
+            <h4>Designer</h4>
+            <ul *ngFor="let designer_item of nav_list_data.designer" class="design_menu hover">
+                <li (click)="emitRoutes(designer_item,'Designer')" routerLinkActive="active" [routerLink]="'designer/'+designer_item.replace(' ','-').toLocaleLowerCase()">
+                    <i-feather [name]="iconMappings[designer_item]"></i-feather>{{designer_item}}</li>
+            </ul>
+        </div>
+        <div class="tab">
+            <h4>Settings</h4>
+            <ul *ngFor="let setting_item of nav_list_data.settings" class="setting_menu hover">
+                <li (click)="emitRoutes(setting_item,'Settings')" routerLinkActive="active" [routerLink]="'settings/'+setting_item.replace(' ','-').toLocaleLowerCase()">
+                    <i-feather [name]="iconMappings[setting_item]"></i-feather>{{setting_item}}</li>
+            </ul>
+        </div>
+    </div>
+    </div>
+</nav>

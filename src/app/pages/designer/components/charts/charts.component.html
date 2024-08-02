@@ -1,0 +1,27 @@
+<div class="chart_container">
+    <div class="tickets_chart">
+        <button [disabled]="prevNumber == 0" (click)="updateChart('prev')" class="btn" type="button"><i-feather name="chevron-left"></i-feather></button>
+        <div id="chartdiv" style="width: 100%; height: 325px"></div>
+        <button [disabled]="nextNumber == this.chartDataList.length" (click)="updateChart('next')" class="btn" type="button"><i-feather name="chevron-right"></i-feather></button>
+    </div>
+
+    <div class="all_charts">
+        <div class="left_charts">
+            <div  class="box">
+                <app-via-source-chart [PieChartData]="serverService.charts_data.graph" [PieChartId]="chartdiv2"></app-via-source-chart>
+            </div>
+            <div  class="box">
+                <app-certainty [chartData]="serverService.charts_data.certainty"></app-certainty>
+            </div>
+        </div>
+        <div style="border: 1px solid black;" class="table">Table</div>
+        <div class="right_charts">
+            <div  class="box">
+                <app-funnel-chart [chartDataItems]="serverService.charts_data.sales_funnel"></app-funnel-chart>
+            </div>
+            <div  class="box">
+                <app-via-source-chart [PieChartData]="serverService.charts_data.sales_request_per_variant" [PieChartId]="chartdiv3"></app-via-source-chart>
+            </div>
+        </div>
+    </div>
+</div>

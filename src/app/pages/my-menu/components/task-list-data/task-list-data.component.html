@@ -1,0 +1,68 @@
+<section class="table">
+  <div class="side_table">
+    <h4> Task List Data</h4>
+
+    <div class="list_container">
+      <div class="row_decide_box">
+        <div class="left">
+          <span>show</span>
+          <select>
+            <option value="5">Select</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+          <span>Rows | 1 to 10 of 55 Entries</span>
+        </div>
+        <div class="right">
+          <i-feather style="cursor: pointer; color: grey; width: 2rem;" name="filter"></i-feather>
+          <i-feather style="cursor: pointer; color: green; width: 2rem;" name="plus-circle"
+            (click)="toggleSideForm()"></i-feather>
+        </div>
+
+      </div>
+      <div class="manage_table">
+        <div class="list_box">
+
+          <table style="width: 100%;">
+            <tr>
+              <th>Id</th>
+              <th>Solution Area</th>
+              <th>Workflow</th>
+              <th>Task Id</th>
+              <th>Task</th>
+              <th>Status</th>
+              <th>Start Date</th>
+              <th>Due Data</th>
+              <th>Priority</th>
+              <th>Action</th>
+            </tr>
+            <tr *ngFor="let data of tableData; let i = index">
+              <td>{{data.id}}</td>
+              <td>{{data.solutionArea}}</td>
+              <td>{{data.workflow}}</td>
+              <td>{{data.taskId}}</td>
+              <td>{{data.task}}</td>
+              <td>{{data.status}}</td>
+              <td>{{data.startDate}}</td>
+              <td>{{data.dueDate}}</td>
+              <td>{{data.priority}}</td>
+              <td>
+                <i-feather style="cursor: pointer; color: green;" name="edit" (click)="editItem(data,i)"></i-feather>
+                <i-feather style="cursor: pointer; color: red;" name="trash-2"
+                  (click)="deleteUser(data.id)"></i-feather>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <app-side-form style="transition: all 0.3s ease-in-out; z-index: 10;" [ngStyle]="{'width':isSideNavForm_Open ? '30%':'0', 'overflow':isSideNavForm_Open ? 'visible':'hidden'}" [isEditable]="isEditable"  [reset]="reset"
+          (updateDataEvent)="updatedData($event)" [item]="item" [itemIndex]="itemIndex"
+          (booleanEvent)="onDataListUpdate($event)" [isSideNavForm_Open]="isSideNavForm_Open"
+          (closeForm)="closeForm($event)"></app-side-form>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<div class="overlay" *ngIf="overlayService.overlayOpen$ | async" (click)="onOverlayClick()"></div>

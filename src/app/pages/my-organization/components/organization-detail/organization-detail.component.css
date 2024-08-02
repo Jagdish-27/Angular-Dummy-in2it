@@ -1,0 +1,79 @@
+@import '../../.././../../styles.css';
+.new-bar{
+    width: 100%;
+    height: 5%;
+    background-color: grey;
+}
+ 
+.organizationData-container{
+    width: 100%;
+    height: 89%;
+    background-color: antiquewhite;
+}
+ 
+.organizationData-container .heading-row{
+    height: 20%;
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+    border-bottom: 1px solid grey;
+    display: flex;
+    grid-gap: 0.5rem;
+}
+ 
+.organizationData-container .heading-row .heading-data-box{
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+}
+ 
+.organizationData-container .heading-row .icon-box{
+    width: 2%;
+    border: 1px solid black;
+}
+ 
+.organizationData-container .heading-row .heading-data-box .data-box{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+ 
+.organizationData-container .heading-row .heading-data-box .data-box .icon-data-box{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    grid-gap: 0.5rem;
+}
+ 
+.role{
+    background-color: aquamarine;
+    border-radius: 51px;
+    padding: 0.2rem 0.5rem;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+ 
+.heading-data-box .data-box h1{
+    font-size: 20px;
+}
+.heading-data-box .data-box h2{
+    font-size: 16px;
+}
+.heading-data-box .data-box span{
+    font-weight: 400;
+    font-size: 14px;
+}
+ 
+.organizationData-container .main-row{
+    height: 80%;
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+}
+ 
+.active{
+    background-color: skyblue!important;
+    color: white!important;
+}

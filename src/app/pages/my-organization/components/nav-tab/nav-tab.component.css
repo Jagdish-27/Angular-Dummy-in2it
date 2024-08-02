@@ -1,0 +1,84 @@
+.mytask_head{
+    width: 99%;
+    height: 10%;
+    background-color: rgb(212, 209, 209);
+    border-bottom: 1px solid grey;
+    display: flex;
+    gap: 5px;
+}
+ 
+.mytask_head .heading_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: 100%;
+    /* border-bottom: 2px solid rgb(71, 12, 232); */
+   
+}
+
+.close {
+    font-size: 1.4rem;
+    opacity: 0.1;
+    transition: opacity 0.3s;
+}
+.nav-link:hover > .close {
+    opacity: 0.8;
+}
+
+.mytask_head{
+    width: 100%;
+    height: 6%;
+    background-color: rgb(212, 209, 209);
+    border-bottom: 1px solid grey;
+    display: flex;
+    align-items: center;
+    /* grid-gap: 1rem; */
+}
+ 
+.mytask_head .heading_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: 100%;
+    /* border-bottom: 2px solid rgb(71, 12, 232); */
+    border-right: 1px solid black;
+   
+}
+ 
+.mytask_head ul{
+    width: 100%;
+    height: 100%;
+}
+.mytask_head ul li{
+    height: 100%;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-right: 1px solid black;
+    background-color: white;
+}
+.mytask_head ul li button{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: white;
+}
+.close {
+    font-size: 1.4rem;
+    opacity: 0.1;
+    transition: opacity 0.3s;
+}
+.nav-link:hover > .close {
+    opacity: 0.8;
+}
+ 
+.active{
+    border-bottom: 2px solid red;
+}
+
+.tabs{
+    height: 100%;
+}

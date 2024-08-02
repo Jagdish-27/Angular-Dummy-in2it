@@ -1,0 +1,268 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <i-feather [class.disabled]="isActiveForm" (click)="onAddClick()" name="plus-circle" class="plus_icon"></i-feather>
+    <a [class.disabled]="isActiveForm" (click)="onAddClick()" style="cursor: pointer" class="navbar-brand">New</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div style="gap: 0.5rem;" class="navbar-nav">
+        <button [disabled]="activeCheckBoxesIds.length !== 1" class="nav-link" (click)="editTopButtonClick()"
+          [class.disabled]="activeCheckBoxesIds.length !== 1">
+          <a class="navbar-brand" aria-current="page">Edit</a>
+        </button>
+        <button (click)="deleteClicked()" [disabled]="!activeCheckBoxesIds.length"
+          [class.disabled]="!activeCheckBoxesIds.length" class="nav-link"><a class="navbar-brand">Delete</a></button>
+        <button class="nav-link"><a class="navbar-brand">Share</a></button>
+        <button class="nav-link"><a class="navbar-brand">Import</a></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<app-nav-tab></app-nav-tab>
+<!-- <div class="mytask_head">
+    <div class="heading_box">
+        <h1 style="cursor: pointer;">{{'Contacts'}}</h1>
+    </div>
+</div> -->
+
+<main class="main_container">
+  <div class="list">
+    <div class="items">
+      <div class="up_record">
+        <p>Directory Pages</p>
+        <!-- [class.active]="currentActiveVal == ''" class="org" -->
+        <div [class.active]="currentActiveVal == 'all'" class="org">
+          <h6 (click)="filterContacs('all')">All Contacts</h6>
+          <p>{{ allContacts.length }} Contacts</p>
+        </div>
+      </div>
+      <div class="down_record">
+        <!-- (keyup)="onSideBarSearchValue($event)" -->
+        <input (keyup)="onSearchValue($event)" type="text" placeholder="Search" />
+        <!-- [class.active]="currentActiveVal == item.name" *ngFor="let item of searchObjListFiltered" -->
+        <div [class.active]="currentActiveVal == item.organization" *ngFor="let item of listContactsData" class="text">
+          <!-- (click)="filterOrganization(item.name)" -->
+          <p (click)="filterContacs(item.organization)" class="first">
+            {{ item.organization }}
+          </p>
+          <!--  == 'Customer' ? customerCount:nonCustomerCount -->
+          <p>{{ item.contacs.length }} Contacts</p>
+        </div>
+        <!-- <div [class.active]="currentActiveVal == 'Non Customer'" class="text">
+        <p (click)="filterOrganization('Non Customer')" class="first">Non Customers</p>
+        <p>{{nonCustomerCount}} organizations</p>
+      </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="my_box">
+    <div class="org-head">
+      <div class="left">
+        <h4>All Contacts List</h4>
+      </div>
+      <div class="right">
+
+        <input (keyup)="onSearchValueContacts($event)" type="text" placeholder="Search" />
+        <i-feather name="settings"></i-feather>
+      </div>
+    </div>
+    <div style="padding: 1rem" class="left">
+      <!-- <span>show</span>
+      <select >
+        <option value="">Select</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+      </select>
+      <span>Rows | 1 to 10 of 55 Entries</span> -->
+    </div>
+    <section class="contacs">
+      <div class="contact_list">
+        <div class="manage_table" [ngStyle]="{
+            width: !isActiveForm ? '100%' : '70%',
+            transition: 'all 0.3s'
+          }">
+          <table class="table">
+            <thead>
+              <tr>
+
+                <th scope="col">
+                  <input (click)="selectAllCheckbox()" style="margin-right: 0.5rem" type="checkbox"
+                    [checked]="selectedChecks" />Organization
+                </th>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let data of filteredData;trackBy: trackByFnForOrgData">
+              <tr *ngFor="let contact of data.contacs; trackBy:trackByContact" style="cursor: pointer">
+                <th class="name_link" scope="row">
+
+                  <input [checked]="isCheck(contact.id,data.organization)"
+                    (change)="onCheckboxChange(contact.id,data.organization, $event.target)"
+                    style="margin-right: 0.5rem" type="checkbox" /><span (click)="organizationClicked(data)">{{
+                    data.organization }}</span>
+                </th>
+                <td class="name_link">
+                  <span (click)="open_contactDetail(contact, data.organization)">{{ contact.firstName }}</span>
+                </td>
+                <td>{{ contact.role }}</td>
+                <td>{{ contact.email }}</td>
+              </tr>
+            </tbody>
+            
+          </table>
+        </div>
+        <div [ngStyle]="{
+            width: isActiveForm ? '30%' : '0%',
+            transition: 'all 0.3s'
+          }" class="profile-box">
+          <div [formGroup]="contact_form" class="form_">
+            <div class="head-row">
+              <h4>{{ !isEditingContact ? "Add New Contact" : "Edit Contact" }}</h4>
+              <p>Bulk Upload</p>
+            </div>
+            <div class="profile-row">
+              <div class="add_pic">
+                <i-feather name="user" class="plus_icon user"></i-feather>
+                <p>Add Photo</p>
+              </div>
+
+              <div class="input-row">
+                <div class="input-controls">
+                  <div class="label">
+                    <label for="name">Name:</label>
+                  </div>
+                  <div class="inputs">
+                    <input formControlName="firstName" type="text" placeholder="Firstname" />
+                    <input formControlName="lastName" type="text" placeholder="Lastname" />
+                  </div>
+                </div>
+                <div class="input-controls_org">
+                  <div class="label">
+                    <label for="organization">Organization:</label>
+                  </div>
+                  <div class="inputs">
+                    <select (change)="onOrgSelectChange($event)" formControlName="organization" class="org-select">
+                      <option value="">select</option>
+                      <option *ngFor="let item of listContactsData" [value]="item.organization">
+                        {{ item.organization }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact_box">
+              <div class="group">
+                <label for="email">Email:</label>
+                <input formControlName="email" class="input_style" type="email" placeholder="example@gmail.com" />
+              </div>
+              <div class="group">
+                <label for="phone">Phone:</label>
+                <div class="group_inputs">
+                  <select formControlName="phone_code">
+                    <option value="">select</option>
+                    <option *ngFor="let code of countryCodeList" [value]="code.phone_code">
+                      {{ code.phone_code }}
+                    </option>
+                  </select>
+                  <input formControlName="phone" class="input_style" placeholder="7849658245" type="number" />
+                </div>
+              </div>
+              <div formArrayName="other_medium" class="medium_inputs">
+                <div *ngFor="
+                    let medium_item of other_medium_array.controls;
+                    let i = index
+                  " [formGroupName]="i" class="group">
+                  <label for="other">Other:</label>
+                  <div class="group_inputs">
+                    <select formControlName="medium">
+                      <option value="">select</option>
+                      <option *ngFor="let item of otherList" [value]="item.name">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                    <input formControlName="detail" class="input_style" type="text" /><i-feather
+                      (click)="remove_medium(i)" name="trash" class="trash"></i-feather>
+                  </div>
+                </div>
+                <!-- <span *ngIf="contact_form.get('other_medium')?.errors?.['required']" style="color: red;" >Medium can not be empty</span> -->
+              </div>
+              <p>
+                <span (click)="add_medium()" class="add_medium">+ Add Another Medium</span>
+              </p>
+            </div>
+
+            <div class="role">
+              <div class="group">
+                <label for="role">Role(s):</label>
+                <div class="group_inputs">
+                  <select formControlName="role">
+                    <option value="">select</option>
+                    <option [disabled]="currentActiveRole && role === 'Admin'" *ngFor="let role of roleList"
+                      [value]="role">
+                      {{ role }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="group">
+              <label style="width: 50%" for="additionalRole">Additional Role:</label>
+              <input formControlName="additional_role" class="input_style" type="text" placeholder="Enter Details" />
+            </div>
+            <div class="remarks">
+              <label for="remarks">Remarks:</label>
+              <textarea formControlName="remarks"></textarea>
+            </div>
+            <div class="btns">
+              <button class="close-button" (click)="closeSideForm()">
+                Cancel
+              </button>
+              <button (click)="clearFormInfo()" class="close-button">
+                Clear Info
+              </button>
+              <button type="submit" (click)="onSubmit()" class="close-button">
+                {{ !isEditingContact ? "Save" : "Edit" }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div [ngStyle]="{
+            width: isContactDetailOpen ? '50%' : '0%',
+            transition: 'all 0.3s'
+          }" class="profile-box">
+          <div class="form_">
+            <div class="profile_row">
+              <div class="icon-text-box">
+                <i-feather name="user" class="icon"></i-feather>
+                <div class="text">
+                  <h2>{{ rowData.firstName }}</h2>
+                  <span>Organization : {{ contactAssociateOrg }}</span>
+                </div>
+              </div>
+              <i-feather (click)="onEditButtonClick()" name="edit" class="icon"></i-feather>
+            </div>
+            <div class="eml_ph_row">
+              <span>email : {{ rowData.email }}</span>
+              <span>phone : {{ rowData.phone }}</span>
+            </div>
+            <div class="role_row">
+              <span>role : {{ rowData.role }}</span>
+              <span>additional : no addional role</span>
+            </div>
+
+            <button (click)="closeSideForm()" class="close-button">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

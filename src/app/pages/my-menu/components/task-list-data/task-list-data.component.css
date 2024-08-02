@@ -1,0 +1,89 @@
+
+
+@import '../../../../../styles.css';
+.side-form {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Initially hidden */
+    width: 400px;
+    height: 100%;
+    background-color: #fff;
+    transition: right 0.3s ease-in-out;
+    z-index: 9999;
+  }
+  .show-side-form {
+    right: 0;
+  }
+.table{
+    /* background: yellow; */
+    /* height: 81%; */
+
+    h4{
+        border-top: 2px solid #bdbdbd;
+        border-bottom: 2px solid #bdbdbd;
+        padding: 1rem 0.7rem;
+    }
+}
+
+.list_container{
+    height: 50%;
+}
+ 
+.list_container .row_decide_box{
+    display: flex;
+    align-items: center;
+    grid-gap: 0.5rem;
+    margin: 1rem 2rem;
+    border-bottom: 1px solid grey;
+    /* padding-bottom: 1rem; */
+    justify-content: space-between;
+}
+
+.right{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+ 
+.list_container .row_decide_box span{
+    font-size: 18px;
+}
+ 
+.list_container .row_decide_box input{
+    width: 3rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 14px;
+}
+ 
+.list_container .list_box{
+    height: 100%;
+    overflow: scroll;
+    width: 100%;
+    /* margin: 1rem 2rem; */
+}
+ 
+table{
+    width: 100%;
+}
+ 
+th,td{
+    /* border-bottom: 1px solid grey; */
+    padding: 1rem;
+}
+ 
+ 
+.pagination_btn_box{
+    display: flex;
+    align-items: center;
+    grid-gap: 0.5rem;
+}
+
+.manage_table{
+    display: flex;
+}
+
+/* position: absolute;
+    bottom: 25px;
+    z-index: 1000000;
+    right: 4rem;
+} */
