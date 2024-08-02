@@ -10,9 +10,12 @@ import { FeatherModule } from 'angular-feather';
 import { HttpClientModule } from '@angular/common/http';
 
 import { allIcons } from 'angular-feather/icons';
-import { PaginationLogicComponent } from './components/pagination-logic/pagination-logic.component';
 import { SideFormComponent } from './components/side-form/side-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AgGridModule } from 'ag-grid-angular';
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MyTaskComponent,
     CardsComponent,
     TaskListDataComponent,
-    PaginationLogicComponent,
     SideFormComponent,
   ],
   imports: [
@@ -29,6 +31,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     FeatherModule.pick(allIcons),
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
+    AgGridModule,
+    SharedModule,
   ]
 })
 export class MyMenuModule { }

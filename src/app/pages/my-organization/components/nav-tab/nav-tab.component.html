@@ -14,13 +14,13 @@
     </div>
   </div>
 </nav>
-
-<div class="mytask_head">
-  <div (click)="activeTab(0,header.link)" class="heading_box" [ngClass]="{'active': navs.length === 0 || !active}">
+<!-- [class.active]="contactTab" -->
+<div  class="mytask_head">
+  <div (click)="activeTab(0,header.link)" class="heading_box"  [ngClass]="{'active': navs.length === 0 || !active || contactTab}">
     <h1 style="cursor: pointer;">{{header.link}}</h1>
   </div>
 
-  <ul  ngbNav #nav="ngbNav" class="nav-tabs">
+  <ul *ngIf="header.link == 'organization'" ngbNav #nav="ngbNav" class="nav-tabs">
 
     <li *ngFor="let org of navs" [ngbNavItem]="org.id" [ngClass]="{'active': active==org.id}">
       <button ngbNavLink (click)="activeTab(org.id,org.organization)">
@@ -32,5 +32,5 @@
 
   </ul>
 
-  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  <!-- <div [ngbNavOutlet]="nav" class="mt-2"></div> -->
 </div>

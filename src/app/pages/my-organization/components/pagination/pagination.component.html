@@ -1,7 +1,0 @@
-<section class="pagination_container">
-    <div class="items">
-    <button [disabled]="currentPage == 1" (click)="pageClicked(currentPage-1)" class="btn">Previous</button>
-    <span (click)="pageClicked(page)" style="cursor: pointer;" [class.active]="page === currentPage" *ngFor="let page of pages">{{page}}</span>
-    <button [disabled]="currentPage == pages.length" (click)="pageClicked(currentPage+1)" class="btn">Next</button>
-    </div>
-</section>

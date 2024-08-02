@@ -1,0 +1,28 @@
+<div class="product_container">
+    <div class="content">
+        <div class="all_org_list">
+            <div class="org-head">
+                <div class="left">
+                    <h4>Product Table List</h4>
+                </div>
+                <div class="right">
+                    <input type="text" placeholder="Search">
+                    <i-feather style="cursor: pointer;" (click)="showHidePanel()"  name="settings"></i-feather> 
+                </div>
+            </div>
+
+            <div class="table table-striped">
+                <app-ag-grid-table [showColPanel]="isPanel" (selectedTableListData)="selectedTableListData($event)" [gridOptions]="gridOptions" [columnDefs]="colDef" [rowData]="standardTableData"></app-ag-grid-table>
+            </div>
+        </div>
+    </div>
+    <div class="btns">
+        <button class="btn">
+            Cancel
+        </button>
+        
+        <button [disabled]="enableDisableIsAddList" routerLink="local-list" (click)="AddSelectedList()" class="btn">
+            Add to list >>
+        </button>
+    </div>
+</div>

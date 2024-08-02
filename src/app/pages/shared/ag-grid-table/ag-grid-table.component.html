@@ -1,0 +1,39 @@
+
+
+<div *ngIf="showColPanel" class="panel">
+<div *ngFor="let col of colDefsList">
+  <div class="listStyle" *ngIf="col.headerName">
+    <i-feather style="cursor: pointer; color: blue;" (click)="showHideCol(col)" [name]="!col.hide ? 'eye':'eye-off'" class="big fill-red"></i-feather><li >{{col.headerName}}</li>
+  </div>
+</div>
+</div>
+<div style="padding: 1rem;">
+  Page Size:
+  <select style="border-radius: 8px;" (change)="onPageSizeChanged($event)">
+      <option value="5">5</option>
+      <option value="10">10</option>
+  </select>
+  <!-- <span>Rows | {{ getRowRange() }} of {{ getTotalEntries() }} Entries</span> -->
+</div>
+
+<ag-grid-angular style="width: 100%; height: 500px;" class="ag-theme-alpine"
+   [rowData]="rowData"
+   [columnDefs]="columnDefs"
+   (gridReady)="gridReady($event)"
+   (selectionChanged)="onSelectionChange()"
+   [defaultColDef]="defaultColDef"
+   [rowSelection]="'multiple'"
+   [suppressRowClickSelection]="true"
+   [paginationPageSize]="paginationPageSize"
+   [pagination]="true"
+   [suppressMovableColumns]="true"
+   [gridOptions]="gridOptions"
+   [isRowSelectable]="isRowSelectable"
+   [getRowStyle]="getRowStyle"
+   [suppressClickEdit]="true"
+   [suppressCellFocus]="true"
+   
+   >
+  </ag-grid-angular>
+
+

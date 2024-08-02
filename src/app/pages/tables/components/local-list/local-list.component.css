@@ -1,0 +1,57 @@
+.container {
+    width: 100%;
+}
+
+.all_org_list {
+    /* width: 85%; */
+    padding: 1rem;
+
+    .org-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        input {
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            padding: 0.7rem;
+            background-color: gainsboro;
+        }
+    }
+}
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+.btn{
+    /* background: purple; */
+    border: 2px solid purple;
+    color: purple;
+    padding: 10px 35px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.btn:last-child{
+    background-color: purple;
+    color: white;
+}
+
+.product_container{
+    width: 100%;
+    height: 100%;
+}
+
+.content{
+    padding: 0 1.5rem;
+}

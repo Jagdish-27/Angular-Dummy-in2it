@@ -1,3 +1,38 @@
-<main class="main">
-    <h3>team-task works!</h3>
-</main>
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" ngModel #nameInput="ngModel" 
+             required minlength="3" maxlength="20">
+      <app-error [control]="nameInput"></app-error>
+      <!-- <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)"
+           class="text-danger">
+        <div *ngIf="nameInput.errors?.['required']">
+          Name is required.
+        </div>
+        <div *ngIf="nameInput.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </div>
+        <div *ngIf="nameInput.errors?.['maxlength']">
+          Name cannot be more than 20 characters long.
+        </div>
+      </div> -->
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" ngModel #emailInput="ngModel" 
+             required email>
+      <app-error [control]="emailInput"></app-error>
+      <!-- <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)"
+           class="text-danger">
+        <div *ngIf="emailInput.errors?.['required']">
+          Email is required.
+        </div>
+        <div *ngIf="emailInput.errors?.['email']">
+          Please enter a valid email address.
+        </div>
+      </div> -->
+    </div>
+    
+    <button type="submit" >Submit</button> 
+    <!-- [disabled]="!myForm.valid" -->
+  </form>

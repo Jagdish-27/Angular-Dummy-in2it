@@ -1,0 +1,29 @@
+<div class="product_container">
+    <div class="content">
+        <div class="all_org_list">
+            <div class="org-head">
+                <div class="left">
+                    <h4>Product Table List</h4>
+                </div>
+                <div class="right">
+                    <input type="text" (keyup)="searchItem($event)" placeholder="Search">
+                    <i-feather (click)="showHidePanel()" style="width: 30px; cursor: pointer;" name="settings"></i-feather>
+                    <i-feather (click)="addNewRow()" style="width: 30px; cursor: pointer;" name="plus-circle"></i-feather>
+
+                </div>
+            </div>
+
+            <div class="table table-striped">
+                <app-ag-grid-table [searchVal]="searchVal" [showColPanel]="isPanel" [gridOptions]="gridOptions" [columnDefs]="colDef" [rowData]="localTableList"></app-ag-grid-table>
+            </div>
+        </div>
+    </div>
+    <div class="btns">
+        <button routerLink="/tables/products" class="btn">
+            Back
+        </button>
+        <button class="btn">
+           Set Data Model >>
+        </button>
+    </div>
+</div>

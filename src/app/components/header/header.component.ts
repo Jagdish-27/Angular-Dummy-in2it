@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import {  Subject, takeUntil } from 'rxjs';
 import { HeaderTitleSubject } from 'src/app/interfaces/Product';
 import { ServerService } from 'src/app/services/server.service';
 

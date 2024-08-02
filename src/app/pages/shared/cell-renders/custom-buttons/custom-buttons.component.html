@@ -1,0 +1,16 @@
+<div class="icons" *ngIf="!isEditable && !params.data.isAddMode">
+    <i-feather style="cursor: pointer; color: green;" name="edit" (click)="onClickEdit()"></i-feather>
+    <i-feather style="cursor: pointer; color: red;" name="trash-2" (click)="deleteUser()"></i-feather>
+</div>
+<div class="icons" *ngIf="isEditable && !params.data.isAddMode">
+    <i-feather style="cursor: pointer; color: green;" (click)="onSaveStopEditing()"  name="check-circle"></i-feather>
+    <i-feather style="cursor: pointer; color: red;" (click)="onCancelClick()" name="x-circle"></i-feather>
+</div>
+
+<div class="icons" *ngIf="params.data.isAddMode && !isEditable">
+    <i-feather style="cursor: pointer; color: green;" (click)="onSaveStopEditing()"  name="check-circle"></i-feather>
+    <i-feather style="cursor: pointer; color: red;" (click)="onRemoveClick()" name="x-circle"></i-feather>
+</div>
+
+<!-- <button type="button" (click)="onClick($event)">{{label}}</button> -->
+

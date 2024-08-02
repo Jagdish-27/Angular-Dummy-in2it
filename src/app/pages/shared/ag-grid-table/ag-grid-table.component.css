@@ -1,0 +1,25 @@
+
+.panel{
+    width: 300px;
+    position: absolute;
+    right: 0%;
+    /* top: 18%; */
+    height: 230px;
+    overflow-y: scroll;
+    border: 1px solid black;
+    z-index: 1000;
+    background-color: white;
+    border-radius: 7px;
+    transition: all 0.5s;
+    margin-top: 2rem;
+}
+
+.listStyle{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    li{
+        list-style-type: none;
+    }
+}

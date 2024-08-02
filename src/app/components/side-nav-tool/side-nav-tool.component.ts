@@ -17,6 +17,7 @@ export class SideNavToolComponent implements OnInit {
     settings:['Custom Task','Organization Settings'],
     my_organization:['Organization','Contact','Solution Areas','Process','Workflows','Human Task','Workflows Execution','Schedule List'],
     designer:['Workflow Builder','Form Builder','Charts'],
+    tables:['Products'],
   }
 
   // Mapping object to associate menu items with their corresponding icon names
@@ -36,6 +37,7 @@ export class SideNavToolComponent implements OnInit {
     'Workflow Builder': 'grid',
     'Form Builder': 'layout',
     'Charts': 'activity',
+    'Products':'box',
   };
 
 

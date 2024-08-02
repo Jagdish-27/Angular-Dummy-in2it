@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { Inject, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -19,11 +19,8 @@ export class CertaintyComponent {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone) { }
 
-  @Input() chartData:any;
+  @Input() chartData:any=[];
 
-
-  ngOnInit(): void {
-  }
 
   // Run the function only in the browser
   browserOnly(f: () => void) {
@@ -122,7 +119,7 @@ export class CertaintyComponent {
 
       var columnTemplate = series.columns.template;
       
-      columnTemplate.adapters.add("fill", (fill, target) => {
+      columnTemplate.adapters.add("fill", (_fill, target) => {
         return chart.get("colors")?.getIndex(series.columns.indexOf(target));
       });
 

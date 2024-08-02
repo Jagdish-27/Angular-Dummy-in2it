@@ -51,7 +51,7 @@ export class ServerService {
       return dataList;
     }
   }
-
+ 
   
 
   rowData:OrganizationData[] = [

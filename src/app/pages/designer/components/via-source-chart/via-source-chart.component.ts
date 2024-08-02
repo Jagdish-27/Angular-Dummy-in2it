@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Inject, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -13,7 +13,7 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 })
 export class ViaSourceChartComponent {
 
-  @Input() PieChartData:any;
+  @Input() PieChartData:any=[];
 
   @Input() PieChartId:any;
 

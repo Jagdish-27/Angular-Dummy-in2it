@@ -1,0 +1,12 @@
+<div class="text-danger" *ngIf="control && control.errors && (control.dirty || control.touched)">
+    <div *ngIf="control.errors.required"><small>{{control.name | titlecase}} field is required</small></div>
+    
+    <div *ngIf="control.errors.email"><small>Email should be valid</small></div>
+    <div *ngIf="control.errors.mobile"><small>{{control.errors.mobile}}</small></div>
+    <div *ngIf="control.errors.confirmPassword"><small>{{control.errors.confirmPassword}}</small></div>
+    <div *ngIf="control.errors.minlength"><small *ngIf="control.errors.minlength">{{control.name | titlecase}} must be at least {{control.errors.minlength.requiredLength}} characters long.</small></div>
+    <div *ngIf="control.errors.maxlength"><small *ngIf="control.errors.maxlength">{{control.name | titlecase}} cannot be more than {{control.errors.maxlength}} characters long.</small></div>
+    <div *ngIf="control.errors.unique"><small *ngIf="control.errors.unique">{{control.name}} should be unique</small></div>
+    <div *ngIf="control.errors.lessThen"><small>{{control.errors.lessThen}}</small></div>
+    <div *ngIf="control.errors.greaterThan"><small>{{control.errors.greaterThan}}</small></div>
+</div>

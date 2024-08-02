@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { HeaderTitleSubject, OrganizationData } from 'src/app/interfaces/Product';
@@ -9,10 +9,10 @@ import { ServerService } from 'src/app/services/server.service';
   templateUrl: './nav-tab.component.html',
   styleUrls: ['./nav-tab.component.css']
 })
-export class NavTabComponent implements OnInit, OnChanges, OnDestroy {
+export class NavTabComponent implements OnInit, OnDestroy {
 
 
-  constructor(private serverService: ServerService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private serverService: ServerService,private router:Router, private route:ActivatedRoute) { }
 
   unSub = new Subject();
 
@@ -29,13 +29,17 @@ export class NavTabComponent implements OnInit, OnChanges, OnDestroy {
   // navs: number[] = JSON.parse(localStorage.getItem('tabs') || '[]');
   counter = this.navs.length + 1;
   active: number = 1;
-
+  contactTab:boolean = false;
   ngOnInit(): void {
     this.navs = JSON.parse(localStorage.getItem('tabs') || '[]');
     // this.header.link = 'Organization';
     this.serverService.headerTitleSubject.pipe(takeUntil(this.unSub)).subscribe((data: HeaderTitleSubject) => this.header = data);
     
-
+    this.route.url.subscribe((url) => {
+      if(url[0].path == 'contact'){
+        this.contactTab = true;
+      }
+    });
 
     // this.route.params.subscribe(params=>{
     //   this.active = +params['id']
@@ -48,7 +52,6 @@ export class NavTabComponent implements OnInit, OnChanges, OnDestroy {
 
     this.serverService.orgDataSubject.pipe(takeUntil(this.unSubOrg)).subscribe((data: OrganizationData) =>{
       // this.orgData.push(data);
-
       const orgIndex = this.navs.findIndex((value)=> value.id === data.id);
 
       if(orgIndex < 0){
@@ -59,10 +62,6 @@ export class NavTabComponent implements OnInit, OnChanges, OnDestroy {
         this.saveTabsState();
       }
     });
-
-  }
-
-  ngOnChanges(_changes: SimpleChanges): void {
 
   }
 
@@ -88,11 +87,6 @@ export class NavTabComponent implements OnInit, OnChanges, OnDestroy {
     event.stopImmediatePropagation();
   }
 
-  // add(event: MouseEvent) {
-  //   this.navs.push(this.counter++);
-  //   this.saveTabsState();
-  //   event.preventDefault();
-  // }
 
   activeTab(id: number,moduleTab:string) {
 

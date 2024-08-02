@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-team-task',
   templateUrl: './team-task.component.html',
-  styleUrls: ['./team-task.component.css']
+  styleUrls: ['./team-task.component.css'],
 })
 export class TeamTaskComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  
+  onSubmit(form: NgForm) {
+
+    if (form.valid) {
+      console.log('Form data:', form);
+    } else {
+      console.log('invalid forms', form);
+    }
   }
 
+  
 }

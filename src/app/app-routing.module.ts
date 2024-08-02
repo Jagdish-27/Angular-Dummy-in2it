@@ -7,6 +7,7 @@ const routes: Routes = [
   {path:'my-organization',loadChildren:()=> import('./pages/my-organization/my-organization.module').then(m=> m.MyOrganizationModule)},
   {path:'designer', loadChildren:()=> import('./pages/designer/designer.module').then(m=> m.DesignerModule)},
   {path:'settings', loadChildren:()=> import('./pages/settings/settings.module').then(m=> m.SettingsModule)},
+  {path:'tables',loadChildren:()=>import('./pages/tables/tables.module').then(m=>m.TablesModule)},
 ];
 
 @NgModule({

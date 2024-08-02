@@ -8,6 +8,7 @@ export interface Nav_List_Data {
   my_menu: string[];
   my_organization: string[];
   designer: string[];
+  tables:string[];
 }
 
 export interface HeaderTitleSubject {

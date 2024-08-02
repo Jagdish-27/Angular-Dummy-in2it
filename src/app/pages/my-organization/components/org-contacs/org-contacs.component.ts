@@ -1,5 +1,7 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ColDef, GridOptions } from 'ag-grid-community';
 import { ContactData, OrganizationData } from 'src/app/interfaces/Product';
+import { LinkButtonComponent } from 'src/app/pages/shared/cell-renders/link-button/link-button.component';
 
 @Component({
   selector: 'app-org-contacs',
@@ -31,10 +33,17 @@ export class OrgContacsComponent implements OnInit, OnChanges {
   }
 
   
-
+  gridOptions!:GridOptions;
+  
   ngOnInit(): void {
+    this.gridOptions = {
+      context:{
+        componentParent:this,
+        parent:'orgContacts'
+      }
+    }
   }
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if(this.contactDetailData){
       this.isActiveForm = false;
     }
@@ -50,6 +59,37 @@ export class OrgContacsComponent implements OnInit, OnChanges {
 
     
   onNameClick() {
+    this.isActiveForm = true;
+  }
+
+  colDefsTable: ColDef[] = [
+    { headerCheckboxSelection: true, checkboxSelection: true, maxWidth: 30, },
+    {
+      headerName: 'Name',
+      field: 'firstName',
+      cellRenderer: LinkButtonComponent,
+      // cellRendererParams: {
+      //   onOrgClick: this.onRendererNameClick.bind(this),
+      // },
+    },
+    { headerName: 'Role', field: 'role' },
+    { headerName: 'Email', field: 'email' },
+    { headerName: 'Phone', field: 'phone' },
+  ];
+
+
+  // onRendererNameClick(params: any) {
+  //   // this.open_contactDetail(params.data, params.data.organization);
+  //   this.rowData = params.data;
+  //   this.isActiveForm = true;
+  // }
+
+  onContactChecked(data:any){
+    if(!data.length){
+      this.rowData = this.rowData;
+      return;
+    }
+    this.rowData = data.pop();
     this.isActiveForm = true;
   }
 

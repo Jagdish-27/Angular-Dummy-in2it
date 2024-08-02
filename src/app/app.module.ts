@@ -11,6 +11,10 @@ import { SideNavToolComponent } from './components/side-nav-tool/side-nav-tool.c
 import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
 
+// import { AgGridModule } from 'ag-grid-angular';
+// import { AgGridTableComponent } from './components/ag-grid-table/ag-grid-table.component';
+
+
 // import { AmChartsModule } from '@amcharts/amcharts4-angular';
 
 
@@ -21,11 +25,13 @@ import { allIcons } from 'angular-feather/icons';
     FooterComponent,
     LayoutComponent,
     SideNavToolComponent,
+    // AgGridTableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FeatherModule.pick(allIcons),
+    // AgGridModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

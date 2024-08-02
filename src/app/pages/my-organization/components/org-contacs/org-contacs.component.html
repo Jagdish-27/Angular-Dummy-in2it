@@ -11,7 +11,7 @@
 <section class="contacs">
     <div class="contact_list">
         <div class="manage_table" [ngStyle]="{width: !isActiveForm ? '100%':'75%', transition:'all 0.3s'}">
-        <table class="table" >
+        <!-- <table class="table" >
             <thead>
                 <tr>
                     <th scope="col"><input style="margin-right: 0.5rem;" type="checkbox">Name</th>
@@ -28,7 +28,8 @@
                     <td>{{contact.phone}}</td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
+        <app-ag-grid-table [gridOptions]="gridOptions" (orgContactCheck)="onContactChecked($event)" [columnDefs]="colDefsTable" [rowData]="contactDetailData.contacs" ></app-ag-grid-table>
     </div>
         <div [ngStyle]="{width: isActiveForm ? '25%':'0%', transition:'all 0.3s'}" class="profile-box">
 

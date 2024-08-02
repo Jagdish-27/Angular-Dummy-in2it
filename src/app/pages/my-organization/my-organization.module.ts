@@ -18,7 +18,8 @@ import { OrganizationDetailComponent } from './components/organization-detail/or
 import { OrgContacsComponent } from './components/org-contacs/org-contacs.component';
 import { GeneralOverviewComponent } from './components/general-overview/general-overview.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PaginationComponent } from './components/pagination/pagination.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -36,7 +37,6 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     OrganizationDetailComponent,
     OrgContacsComponent,
     GeneralOverviewComponent,
-    PaginationComponent,
     
   ],
   imports: [
@@ -47,6 +47,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     NgbNavModule,
     FormsModule,
     ReactiveFormsModule,
+    AgGridModule,
+    SharedModule
   ]
 })
 export class MyOrganizationModule { }

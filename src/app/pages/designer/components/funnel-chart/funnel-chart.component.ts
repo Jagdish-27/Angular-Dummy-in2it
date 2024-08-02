@@ -18,7 +18,7 @@ export class FunnelChartComponent implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone) { }
 
-  @Input() chartDataItems:any;
+  @Input() chartDataItems:any=[];
 
 
   ngOnInit(): void {

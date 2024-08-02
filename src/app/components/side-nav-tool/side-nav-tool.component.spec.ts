@@ -22,4 +22,15 @@ describe('SideNavToolComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should test onIconClick',()=>{
+    component.onIconClick();
+    expect(component.sideNavOpen).toBe(false);
+    component.onIconClick();
+    expect(component.sideNavOpen).toBe(true);
+  });
+
+  it('should test emitRoutes',()=>{
+    component.emitRoutes('my-task','My Menu');
+  })
 });

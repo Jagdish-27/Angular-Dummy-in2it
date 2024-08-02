@@ -57,7 +57,7 @@
  
 .list_container .list_box{
     height: 100%;
-    overflow: scroll;
+    /* overflow: scroll; */
     width: 100%;
     /* margin: 1rem 2rem; */
 }

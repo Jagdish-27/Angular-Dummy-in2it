@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter} from '@angular/core';
 import { Inject, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -82,37 +82,6 @@ export class ChartsComponent {
       }));
 
       // Define data
-      let sales_ticket_per_owner = [
-        {
-          "user_name": "Tinku Sharma",
-          "total_ticket": 89
-        },
-        {
-          "user_name": "Vishal Mishra",
-          "total_ticket": 3
-        },
-        {
-          "user_name": "Pawna Kumare",
-          "total_ticket": 19
-        },
-        {
-          "user_name": "Shivank Tyagi",
-          "total_ticket": 36
-        },
-        {
-          "user_name": "Vikash Tiwari123",
-          "total_ticket": 6
-        },
-        {
-          "user_name": "Vikash Tiwari",
-          "total_ticket": 5
-        },
-        {
-          "user_name": "Ankit Tyagi",
-          "total_ticket": 90
-        }
-      ];
-
       
       // hide the side data counting on the Y-axis in amCharts 5
       var yRenderer = am5xy.AxisRendererY.new(root, {})

@@ -12,6 +12,13 @@
             </ul>
         </div>
         <div class="tab">
+            <h4 >Tables</h4>
+            <ul *ngFor="let products_item of nav_list_data.tables" class="org_menu hover">
+                <li (click)="emitRoutes(products_item,'Tables')" routerLinkActive="active" [routerLink]="'tables/'+products_item.replace(' ','-').toLocaleLowerCase()">
+                    <i-feather [name]="iconMappings[products_item]"></i-feather>{{products_item}}</li>
+            </ul>
+        </div>
+        <div class="tab">
             <h4 >My Organization</h4>
             <ul *ngFor="let org_item of nav_list_data.my_organization" class="org_menu hover">
                 <li (click)="emitRoutes(org_item,'My Organization')" routerLinkActive="active" [routerLink]="'my-organization/'+org_item.replace(' ','-').toLocaleLowerCase()">

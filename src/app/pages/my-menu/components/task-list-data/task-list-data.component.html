@@ -5,13 +5,13 @@
     <div class="list_container">
       <div class="row_decide_box">
         <div class="left">
-          <span>show</span>
+          <!-- <span>show</span>
           <select>
             <option value="5">Select</option>
             <option value="5">5</option>
             <option value="10">10</option>
           </select>
-          <span>Rows | 1 to 10 of 55 Entries</span>
+          <span>Rows | 1 to 10 of 55 Entries</span> -->
         </div>
         <div class="right">
           <i-feather style="cursor: pointer; color: grey; width: 2rem;" name="filter"></i-feather>
@@ -23,7 +23,7 @@
       <div class="manage_table">
         <div class="list_box">
 
-          <table style="width: 100%;">
+          <!-- <table style="width: 100%;">
             <tr>
               <th>Id</th>
               <th>Solution Area</th>
@@ -52,12 +52,14 @@
                   (click)="deleteUser(data.id)"></i-feather>
               </td>
             </tr>
-          </table>
+          </table> -->
+<app-ag-grid-table [columnDefs]="colDefsTable" [rowData]="tableData" [gridOptions]="gridOptions"></app-ag-grid-table>
+        
         </div>
         <app-side-form style="transition: all 0.3s ease-in-out; z-index: 10;" [ngStyle]="{'width':isSideNavForm_Open ? '30%':'0', 'overflow':isSideNavForm_Open ? 'visible':'hidden'}" [isEditable]="isEditable"  [reset]="reset"
           (updateDataEvent)="updatedData($event)" [item]="item" [itemIndex]="itemIndex"
           (booleanEvent)="onDataListUpdate($event)" [isSideNavForm_Open]="isSideNavForm_Open"
-          (closeForm)="closeForm($event)"></app-side-form>
+          (closeForm)="closeForm($event)" [gridOptions]="gridOptions"></app-side-form>
       </div>
 
     </div>
@@ -65,4 +67,4 @@
 
 </section>
 
-<div class="overlay" *ngIf="overlayService.overlayOpen$ | async" (click)="onOverlayClick()"></div>
+<!-- <div class="overlay" *ngIf="overlayService.overlayOpen$ | async" (click)="onOverlayClick()"></div> -->

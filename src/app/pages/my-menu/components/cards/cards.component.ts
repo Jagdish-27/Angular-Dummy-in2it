@@ -15,7 +15,8 @@ export class CardsComponent implements OnInit {
   ngOnInit(): void {
     if (this.dataArr && this.dataArr.length > 0) {
       this.default_name = this.dataArr[0].name;
-    }
+    };
+
   }
 
   onCardClick(name: string) {

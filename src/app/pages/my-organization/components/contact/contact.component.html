@@ -8,12 +8,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div style="gap: 0.5rem;" class="navbar-nav">
-        <button [disabled]="activeCheckBoxesIds.length !== 1" class="nav-link" (click)="editTopButtonClick()"
-          [class.disabled]="activeCheckBoxesIds.length !== 1">
+        <button [disabled]="selected_contact_data.length !== 1" class="nav-link" (click)="editTopButtonClick()"
+          [class.disabled]="selected_contact_data.length !== 1">
           <a class="navbar-brand" aria-current="page">Edit</a>
         </button>
-        <button (click)="deleteClicked()" [disabled]="!activeCheckBoxesIds.length"
-          [class.disabled]="!activeCheckBoxesIds.length" class="nav-link"><a class="navbar-brand">Delete</a></button>
+        <button (click)="deleteClicked()" [disabled]="!selected_contact_data.length"
+          [class.disabled]="!selected_contact_data.length" class="nav-link"><a class="navbar-brand">Delete</a></button>
         <button class="nav-link"><a class="navbar-brand">Share</a></button>
         <button class="nav-link"><a class="navbar-brand">Import</a></button>
       </div>
@@ -84,7 +84,8 @@
             width: !isActiveForm ? '100%' : '70%',
             transition: 'all 0.3s'
           }">
-          <table class="table">
+          <app-ag-grid-table [gridOptions]="gridOptions" (selectedCheckBoxs_id)="selectedContactsIds($event)" [columnDefs]="colDefsTable" [rowData]="filterAllOrgAndContacts"></app-ag-grid-table>
+          <!-- <table class="table">
             <thead>
               <tr>
 
@@ -97,6 +98,7 @@
                 <th scope="col">Email</th>
               </tr>
             </thead>
+            
             <tbody *ngFor="let data of filteredData;trackBy: trackByFnForOrgData">
               <tr *ngFor="let contact of data.contacs; trackBy:trackByContact" style="cursor: pointer">
                 <th class="name_link" scope="row">
@@ -113,8 +115,7 @@
                 <td>{{ contact.email }}</td>
               </tr>
             </tbody>
-            
-          </table>
+          </table> -->
         </div>
         <div [ngStyle]="{
             width: isActiveForm ? '30%' : '0%',
@@ -122,7 +123,7 @@
           }" class="profile-box">
           <div [formGroup]="contact_form" class="form_">
             <div class="head-row">
-              <h4>{{ !isEditingContact ? "Add New Contact" : "Edit Contact" }}</h4>
+              <h4>{{ !isEditingContact ? "Add New Contact" : "Update Contact" }}</h4>
               <p>Bulk Upload</p>
             </div>
             <div class="profile-row">
@@ -181,23 +182,29 @@
                   " [formGroupName]="i" class="group">
                   <label for="other">Other:</label>
                   <div class="group_inputs">
-                    <select formControlName="medium">
+                    <select (change)="onMediumSelect($event.target,i)" formControlName="medium">
                       <option value="">select</option>
                       <option *ngFor="let item of otherList" [value]="item.name">
                         {{ item.name }}
                       </option>
                     </select>
-                    <input formControlName="detail" class="input_style" type="text" /><i-feather
+                    <select *ngIf="isPhoneTrue(i)" formControlName="phone_code_other">
+                      <option value="">select</option>
+                      <option *ngFor="let code of countryCodeList" [value]="code.phone_code">
+                        {{ code.phone_code }}
+                      </option>
+                    </select>
+                    <input  formControlName="detail" class="input_style" type="text" /><i-feather
                       (click)="remove_medium(i)" name="trash" class="trash"></i-feather>
                   </div>
                 </div>
-                <!-- <span *ngIf="contact_form.get('other_medium')?.errors?.['required']" style="color: red;" >Medium can not be empty</span> -->
               </div>
               <p>
                 <span (click)="add_medium()" class="add_medium">+ Add Another Medium</span>
               </p>
             </div>
-
+            
+            <!-- <span *ngIf="contact_form.get('other_medium')?.errors?.['required']" style="color: red;" >Medium can not be empty</span> -->
             <div class="role">
               <div class="group">
                 <label for="role">Role(s):</label>
@@ -228,7 +235,7 @@
                 Clear Info
               </button>
               <button type="submit" (click)="onSubmit()" class="close-button">
-                {{ !isEditingContact ? "Save" : "Edit" }}
+                {{ !isEditingContact ? "Save" : "Update" }}
               </button>
             </div>
           </div>

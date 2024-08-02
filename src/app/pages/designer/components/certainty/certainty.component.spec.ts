@@ -22,4 +22,5 @@ describe('CertaintyComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

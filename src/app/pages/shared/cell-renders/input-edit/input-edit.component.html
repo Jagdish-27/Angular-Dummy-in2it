@@ -1,0 +1,7 @@
+<p *ngIf="!params.data.isEditing && fieldName == 'table_name.value'">{{params.data.table_name.value}}</p>
+<p *ngIf="!params.data.isEditing && fieldName == 'description.value'">{{params.data.description.value}}</p>
+<input *ngIf="params.data.isEditing && fieldName == 'table_name.value' " [(ngModel)]="params.data.updatedData.table_name.value"  type="text" class="input">
+<input *ngIf="params.data.isEditing && fieldName == 'description.value'" [(ngModel)]="params.data.updatedData.description.value"  type="text" class="input">
+
+<input *ngIf="params.data.isAddMode && fieldName == 'table_name.value'" [(ngModel)]="params.data.updatedData.table_name.value"  type="text" class="input">
+<input *ngIf="params.data.isAddMode && fieldName == 'description.value'" [(ngModel)]="params.data.updatedData.description.value"  type="text" class="input">

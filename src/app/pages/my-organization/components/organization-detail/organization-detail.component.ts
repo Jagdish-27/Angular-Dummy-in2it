@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrganizationData } from 'src/app/interfaces/Product';
 import { OrgDataService } from 'src/app/services/org-data.service';
@@ -9,7 +9,7 @@ import { ServerService } from 'src/app/services/server.service';
   templateUrl: './organization-detail.component.html',
   styleUrls: ['./organization-detail.component.css']
 })
-export class OrganizationDetailComponent implements OnInit, OnChanges {
+export class OrganizationDetailComponent implements OnInit {
 
   constructor(private serverService: ServerService, private router: Router,private route:ActivatedRoute,private orgDataService:OrgDataService) { }
 
@@ -65,22 +65,10 @@ export class OrganizationDetailComponent implements OnInit, OnChanges {
 
       
       if(this.tabId !== 0){
-        
-        this.activeOrgData = this.orgDataService.getOrgData().find(data => data.id == id) as OrganizationData;
+        this.activeOrgData = this.orgDataService.getOrgData().find((data: { id: any; }) => data.id == this.tabId);
       }
     })
-    // this.route.params.subscribe(params=>{
-    //   this.tabId = +params['id']
-    //   this.activeOrgData = this.serverService.rowData.find(data=> data.id === this.tabId) as OrganizationData;
-    // })
 
-
-    // this.route.paramMap.subscribe(param=>{
-    //   this.activeOrgData = history.state.data;
-    // })
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
   }
 
 
