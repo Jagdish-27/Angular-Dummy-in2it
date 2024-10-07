@@ -17,7 +17,6 @@ import { allIcons } from 'angular-feather/icons';
 
 // import { AmChartsModule } from '@amcharts/amcharts4-angular';
 
-
 @NgModule({
   declarations: [
     AppComponent,

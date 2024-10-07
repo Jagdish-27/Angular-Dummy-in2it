@@ -1,0 +1,10 @@
+<div class="calendar-year">
+    <div class="calendar-month" *ngFor="let month of months">
+      <mwl-calendar-month-view
+        [viewDate]="month"
+        [events]="events"
+        (dayClicked)="onDayClicked($event)">
+      </mwl-calendar-month-view>
+    </div>
+  </div>
+  

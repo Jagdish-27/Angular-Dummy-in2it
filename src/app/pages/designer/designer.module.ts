@@ -12,7 +12,6 @@ import { FunnelChartComponent } from './components/funnel-chart/funnel-chart.com
 import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
 
-
 @NgModule({
   declarations: [
     FormBuilderComponent,
@@ -20,13 +19,13 @@ import { allIcons } from 'angular-feather/icons';
     ChartsComponent,
     ViaSourceChartComponent,
     CertaintyComponent,
-    FunnelChartComponent
+    FunnelChartComponent,
   ],
   imports: [
     CommonModule,
     DesignerRoutingModule,
     FeatherModule,
     FeatherModule.pick(allIcons),
-  ]
+  ],
 })
-export class DesignerModule { }
+export class DesignerModule {}

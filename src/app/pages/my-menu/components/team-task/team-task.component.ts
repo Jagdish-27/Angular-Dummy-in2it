@@ -6,22 +6,41 @@ import { NgForm } from '@angular/forms';
   templateUrl: './team-task.component.html',
   styleUrls: ['./team-task.component.css'],
 })
-export class TeamTaskComponent implements OnInit {
+export class TeamTaskComponent implements OnInit{
 
 
   constructor() {}
 
-  ngOnInit(): void {}
+  name:string = 'rohit';
+  userFormObj = {
+    name: '',
+    email: '',
+    address: [{ city: '', country: '' }],
+  };
 
   
-  onSubmit(form: NgForm) {
+  ngOnInit(): void {
 
-    if (form.valid) {
-      console.log('Form data:', form);
-    } else {
-      console.log('invalid forms', form);
-    }
+  }
+  
+  get getUserFormArray() {
+    return this.userFormObj.address;
   }
 
+  addField() {
+    this.getUserFormArray.push({ city: '', country: '' });
+  }
+
+  deleteField(i:number){
+    this.getUserFormArray.splice(i,1);
+  }
+  onSubmit(_form:NgForm) {
+    console.log(this.userFormObj)
+
+  }
+
+  runSettingsOnStart(){
+    console.log('log from app initializer')
+  }
   
 }

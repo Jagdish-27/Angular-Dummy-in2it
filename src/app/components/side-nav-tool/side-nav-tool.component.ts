@@ -10,7 +10,7 @@ export class SideNavToolComponent implements OnInit {
 
   constructor(private serverService:ServerService) { }
 
-  sideNavOpen:boolean = true;
+  sideNavOpen:boolean = false;
 
   nav_list_data:Nav_List_Data = {
     my_menu:['My Task','Team Task'],

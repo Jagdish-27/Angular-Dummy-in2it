@@ -10,6 +10,6 @@ export class ErrorComponent implements OnInit{
   @Input("control") control: any;
 
   ngOnInit(): void {
-    console.log('control', this.control);
+    // console.log('control', this.control);
   }
 }

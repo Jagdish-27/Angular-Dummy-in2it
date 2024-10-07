@@ -48,7 +48,7 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     AgGridModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class MyOrganizationModule { }

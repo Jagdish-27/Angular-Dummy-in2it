@@ -1,1 +1,26 @@
 <p>workflow-builder works!</p>
+
+<div id="chartdiv"></div>
+
+<div class="image-upload">
+    <h1>Upload an Image</h1>
+    <input type="file" (change)="onFileChange($event)" accept="image/*,audio/*,video/*" />
+    <br /><br />
+    <div *ngIf="fileType === 'image'">
+        <img [src]="fileSrc" alt="Image Preview" style="max-width: 500px; max-height: 500px" />
+    </div>
+</div>
+
+<div *ngIf="fileType === 'audio'">
+    <audio controls>
+        <source [src]="fileSrc" type="audio/mpeg" />
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+<div *ngIf="fileType === 'video'">
+    <video controls style="max-width: 500px; max-height: 500px">
+        <source [src]="fileSrc" type="video/mp4" />
+        Your browser does not support the video element.
+    </video>
+</div>

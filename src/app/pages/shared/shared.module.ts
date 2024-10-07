@@ -11,7 +11,10 @@ import { LinkButtonComponent } from './cell-renders/link-button/link-button.comp
 import { InputEditComponent } from './cell-renders/input-edit/input-edit.component';
 import { FormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AngularCalenderComponent } from './angular-calender/angular-calender.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { ErrorComponent } from './error/error.component';
     CustomButtonsComponent,
     LinkButtonComponent,
     InputEditComponent,
-    ErrorComponent
+    ErrorComponent,
+    AngularCalenderComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,11 @@ import { ErrorComponent } from './error/error.component';
     AgGridModule,
     FeatherModule.pick(allIcons),
     FormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
-  exports:[AgGridTableComponent,ErrorComponent]
+  exports:[AgGridTableComponent,ErrorComponent,AngularCalenderComponent]
 })
 export class SharedModule { }
