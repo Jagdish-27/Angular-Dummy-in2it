@@ -1,0 +1,9 @@
+<!-- Rounded switch -->
+
+<ng-container *ngIf="params.value == 'active'">
+  <span>{{ toggleSwitch ? "Active" : "InActive" }}</span>
+  <label class="switch">
+    <input type="checkbox" [(ngModel)]="toggleSwitch" (change)="onSwitch()" />
+    <span class="slider round"></span>
+  </label>
+</ng-container>

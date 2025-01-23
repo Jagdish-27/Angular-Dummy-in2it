@@ -3,6 +3,7 @@ import { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import { OverlayService } from 'src/app/services/overlay.service';
 import { ServerService } from 'src/app/services/server.service';
 import { CustomButtonsComponent } from 'src/app/pages/shared/cell-renders/custom-buttons/custom-buttons.component';
+import { StatusRendererComponent } from 'src/app/pages/shared/cell-renders/status-renderer/status-renderer.component';
 
 @Component({
   selector: 'app-task-list-data',
@@ -16,8 +17,7 @@ export class TaskListDataComponent implements OnInit {
   ) {}
 
   api!: GridApi;
-  gridOptions!:GridOptions
-
+  gridOptions!: GridOptions;
 
   currentPage: number = 1;
   itemsPerPage: number = 5;
@@ -34,12 +34,12 @@ export class TaskListDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.tableData = this.server.getUser_Data();
-    this.gridOptions={
-      context:{
+    this.gridOptions = {
+      context: {
         componentParent: this,
-        parent: 'tasks'
-      }
-    }
+        parent: 'tasks',
+      },
+    };
   }
 
   onDataListUpdate(data: any) {
@@ -95,7 +95,10 @@ export class TaskListDataComponent implements OnInit {
     { field: 'workflow' },
     { field: 'taskId' },
     { field: 'task' },
-    { field: 'status' },
+    {
+      field: 'status',
+      cellRenderer: StatusRendererComponent,
+    },
     { field: 'startDate' },
     { field: 'dueDate' },
     {

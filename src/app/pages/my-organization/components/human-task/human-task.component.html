@@ -1,1 +1,159 @@
-<p>human-task works!</p>
+<svg
+  style="background: black"
+  [attr.width]="mainWidth - 50"
+  [attr.height]="mainHeight - 88"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  [attr.viewBox]="viewBoxSize(0, 0, mainWidth - 50, mainHeight - 88)"
+  (pointerup)="up()"
+  (pointermove)="move($event)"
+>
+  <defs>
+    <filter id="rounded-corners" width="110%" height="100%">
+      <feflood flood-color="#fff" />
+      <fecomponenttransfer>
+        <fefunca type="table" tableValues="0 1 1 1 1 1 1 1" />
+      </fecomponenttransfer>
+      <fecomposite operator="over" in="SourceGraphic" />
+    </filter>
+  </defs>
+
+  <!-- <defs>
+      <filter x="0" y="0" width="1" height="1" id="solid">                                       
+        <feflood result="bg" [attr.flood-color]="(isLightMode && '#ffffff') || '#292929'" />
+        <femerge>
+          <femergenode in="bg" />
+          <femergenode in="SourceGraphic" />
+        </femerge>
+      </filter>
+    </defs> -->
+  <g
+    *ngFor="let item of topologyDetails.topologyItems; let i = index"
+    fill="white"
+    stroke="green"
+    stroke-width="5"
+  >
+    <image
+      *ngIf="!item?.showDevice"
+      #siteImg
+      [attr.x]="item.x"
+      [attr.y]="item.y"
+      [attr.id]="item?.id"
+      [ngClass]="{ blur: item?.showDevice === false }"
+      preserveAspectRatio="none"
+      xlink:href="assets/Group 9875.svg"
+      (mousedown)="down($event, item)"
+      (pointerdown)="
+        pointerDown($event, siteImg, dragOperationTypes.Shape, item, i)
+      "
+      (dblclick)="showDevices(item)"
+    />
+
+    <rect
+      *ngIf="item?.showDevice"
+      [attr.width]="item?.rect?.width"
+      [attr.height]="item?.rect?.height"
+      [attr.x]="item?.rect?.x"
+      [attr.y]="item?.rect?.y"
+      stroke-width="2"
+      stroke-dasharray="4 4"
+    />
+    <text
+      fill="#5184AF"
+      font-size="14"
+      stroke-width="0"
+      [attr.x]="item?.showDevice ? item.x - 35 : item.x"
+      [attr.y]="item?.showDevice ? item.y + 20 : item.y"
+    >
+      {{ item.name }}
+    </text>
+    <image
+      *ngIf="item?.showDevice"
+      [attr.x]="item?.cross?.x"
+      [attr.y]="item?.cross?.y"
+      width="15"
+      height="15"
+      preserveAspectRatio="none"
+      xlink:href="assets/x.svg"
+      (click)="hideDevice(item)"
+    />
+
+    <path
+      *ngIf="item.z_end?.x && item.z_end?.y"
+      [attr.d]="
+        constructPathForSite(item.x, item.y, item.z_end?.x, item.z_end?.y)
+      "
+      style="fill: none; stroke: #056b05; stroke-width: 1"
+    ></path>
+  </g>
+</svg>
+<div class="img-zoom-container">
+  <img id="myimage" src="assets\Edit.png" width="300" height="240" alt="Girl" />
+  <div id="myresult" class="img-zoom-result"></div>
+</div>
+<!-- (mouseover)="imageZoom('myimage', 'myresult')" -->
+<!-- <div class="img-magnifier-container">
+  <img
+    (mouseover)="magnify('myimage', 3)"
+    (mouseleave)="hideGlass()"
+    id="myimage"
+    src="https://loremflickr.com/1200/800"
+    width="600"
+    height="400"
+  />
+  <div id="myresult" class="img-zoom-result"></div>
+</div> -->
+
+<!-- (mouseover)="onOver()" -->
+<!-- <circle cx="60" cy="60" r="25" /> -->
+<!-- <text
+    [attr.x]="5"
+    [attr.y]="10"
+    fill="#5184AF"
+    font-size="10"
+    stroke-width="0"
+  >
+    {{ "Trusted site" }}
+  </text> -->
+<!-- <g *ngIf="cord?.showDevice">
+        <g *ngFor="let circuit of cord?.circuits_details">
+          <path
+            *ngIf="
+              circuit?.circuit &&
+              circuit?.a_end?.device?.lineCordinate?.x &&
+              circuit?.a_end?.device?.lineCordinate?.y &&
+              circuit?.z_end?.device?.lineCordinate?.x &&
+              circuit?.z_end?.device?.lineCordinate?.y
+            "
+            [attr.d]="
+              constructPathForSite(
+                circuit?.a_end?.device?.lineCordinate.x,
+                circuit?.a_end?.device?.lineCordinate.y,
+                circuit?.z_end?.device?.lineCordinate.x,
+                circuit?.z_end?.device?.lineCordinate.y
+              )
+            "
+            style="fill: none; stroke: #056b05; stroke-width: 1"></path>
+        </g>
+        <g id="Layer_3" *ngFor="let device of cord?.devices; let j = index" data-name="Layer 3">
+          <image
+            *ngIf="cord?.showDevice"
+            [attr.x]="device.imageCordinate.x"
+            [attr.y]="device.imageCordinate.y"
+            [attr.width]="10"
+            [attr.height]="10"
+            preserveAspectRatio="none"
+            [attr.href]="device.image" />
+          <text
+            *ngIf="cord?.showDevice && showHideFilter?.deviceName && showHideFilter?.labels"
+            [attr.x]="device?.textCordinate?.x"
+            [attr.y]="device?.textCordinate?.y"
+            fill="#5184AF"
+            font-size="10"
+            (mouseover)="showName($event, device.name)"
+            (mouseleave)="hideName()"
+            stroke-width="0">
+            {{ device?.wrapName }}
+          </text>
+        </g>
+      </g> -->

@@ -15,6 +15,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AngularCalenderComponent } from './angular-calender/angular-calender.component';
+import { StatusRendererComponent } from './cell-renders/status-renderer/status-renderer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AngularCalenderComponent } from './angular-calender/angular-calender.co
     LinkButtonComponent,
     InputEditComponent,
     ErrorComponent,
-    AngularCalenderComponent
+    AngularCalenderComponent,
+    StatusRendererComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 .sidebar_layout{
     display: flex;
     height: 93vh;
-    width: 100vw;
+    /* width: 100vw; */
 }
  
 .app_layout{

@@ -8,14 +8,13 @@ import { ProductsService } from 'src/app/services/products.service';
   templateUrl: './custom-buttons.component.html',
   styleUrls: ['./custom-buttons.component.css'],
 })
-export class CustomButtonsComponent  {
+export class CustomButtonsComponent {
   constructor(private productsService: ProductsService) {}
 
   params!: ICellRendererParams;
   label!: string;
 
   isEditable: boolean = false;
-
 
   agInit(param: ICellRendererParams): void {
     this.params = param;
@@ -38,8 +37,8 @@ export class CustomButtonsComponent  {
       this.isEditable = true;
 
       this.params.data.isEditing = true;
-      
-      const updated_data =JSON.parse( JSON.stringify(this.params.data));
+
+      const updated_data = JSON.parse(JSON.stringify(this.params.data));
 
       this.params.data.updatedData = updated_data;
     }
@@ -48,24 +47,33 @@ export class CustomButtonsComponent  {
   onSaveStopEditing() {
     this.isEditable = false;
 
-    if(!this.params.data.isAddMode){
+    if (!this.params.data.isAddMode) {
       this.params.data.isEditing = false;
-      
-      this.params.data.table_name.value = this.params.data.updatedData.table_name.value;
-      this.params.data.description.value = this.params.data.updatedData.description.value;
+
+      this.params.data.table_name.value =
+        this.params.data.updatedData.table_name.value;
+      this.params.data.description.value =
+        this.params.data.updatedData.description.value;
       delete this.params.data.isEditing;
       delete this.params.data.updatedData;
-      localStorage.setItem('LocalList_Data', JSON.stringify(this.params.context.componentParent.localTableList));
-    }else{
+      localStorage.setItem(
+        'LocalList_Data',
+        JSON.stringify(this.params.context.componentParent.localTableList)
+      );
+    } else {
       this.params.data.isAddMode = false;
-      this.params.data.table_name.value = this.params.data.updatedData.table_name.value;
-      this.params.data.description.value = this.params.data.updatedData.description.value;
+      this.params.data.table_name.value =
+        this.params.data.updatedData.table_name.value;
+      this.params.data.description.value =
+        this.params.data.updatedData.description.value;
       delete this.params.data.isAddMode;
       delete this.params.data.updatedData;
-      let filteredData = this.params.context.componentParent.localTableList.filter((val:any)=>!val.isAddMode)
+      let filteredData =
+        this.params.context.componentParent.localTableList.filter(
+          (val: any) => !val.isAddMode
+        );
       localStorage.setItem('LocalList_Data', JSON.stringify(filteredData));
     }
-
   }
 
   deleteUser() {
@@ -105,13 +113,12 @@ export class CustomButtonsComponent  {
   onCancelClick() {
     this.isEditable = false;
 
-    this.params.data.isEditing = false
-    this.params.context.action = 'cancel'
+    this.params.data.isEditing = false;
+    this.params.context.action = 'cancel';
     delete this.params.data.updatedData;
-
   }
 
-  onRemoveClick(){
+  onRemoveClick() {
     this.params.api.applyTransaction({ remove: [this.params.data] });
   }
 }

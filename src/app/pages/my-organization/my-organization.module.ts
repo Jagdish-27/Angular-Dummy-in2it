@@ -21,8 +21,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 import { SharedModule } from '../shared/shared.module';
 
-
-
 @NgModule({
   declarations: [
     HumanTaskComponent,
@@ -37,7 +35,6 @@ import { SharedModule } from '../shared/shared.module';
     OrganizationDetailComponent,
     OrgContacsComponent,
     GeneralOverviewComponent,
-    
   ],
   imports: [
     CommonModule,
@@ -49,6 +46,6 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     AgGridModule,
     SharedModule,
-  ]
+  ],
 })
-export class MyOrganizationModule { }
+export class MyOrganizationModule {}
