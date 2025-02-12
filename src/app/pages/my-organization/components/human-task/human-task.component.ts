@@ -35,7 +35,10 @@ export class HumanTaskComponent implements OnInit {
         y: 435,
         z_end: { x: 315, y: 220, connect_with: 'Site A' },
       },
-      { id: 5, name: 'Site E', x: 320, y: 365 },
+      { id: 5, name: 'Site E', x: 320, y: 965 },
+      { id: 5, name: 'Site F', x: 2000, y: 365 },
+      { id: 5, name: 'Site G', x: 320, y: 2265 },
+      { id: 5, name: 'Site H', x: 920, y: 365 },
     ] as any,
   };
 
@@ -272,18 +275,35 @@ export class HumanTaskComponent implements OnInit {
     var img: any, lens: HTMLElement, result: any, cx: number, cy: number;
     img = document.getElementById(imgID);
     result = document.getElementById(resultID);
+
     /* Create lens: */
     lens = document.createElement('DIV');
     lens.setAttribute('class', 'img-zoom-lens');
+    lens.style.width = (window.innerWidth + 20 - 50).toString() + 'px';
+    lens.style.height = (window.innerHeight - 20 - 88).toString() + 'px';
     img.parentElement.insertBefore(lens, img);
     /* Insert lens: */
     /* Calculate the ratio between result DIV and lens: */
-    cx = result.offsetWidth / lens.offsetWidth;
-    cy = result.offsetHeight / lens.offsetHeight;
+    let rect = result.getBoundingClientRect();
+    let imgRect = img.getBoundingClientRect();
+
+    cx = rect.width / lens.offsetWidth;
+    cy = rect.height / lens.offsetHeight;
+
     /* Set background properties for the result DIV */
-    result.style.backgroundImage = "url('" + img.src + "')";
+    // result.style.backgroundImage = "url('" + img.src + "')";
+
     result.style.backgroundSize =
-      img.width * cx + 'px ' + img.height * cy + 'px';
+      imgRect.width * cx + 'px ' + imgRect.height * cy + 'px';
+
+    // this.viewBoxSize(
+    //   +(imgRect.width * cx + 'px'),
+    //   +(imgRect.height * cy + 'py'),
+    //   this.mainWidth - 50,
+    //   this.mainHeight - 88
+    // );
+    // this.cdr.detectChanges();
+
     /* Execute a function when someone moves the cursor over the image, or the lens: */
     lens.addEventListener('mousemove', moveLens);
     img.addEventListener('mousemove', moveLens);
@@ -299,6 +319,7 @@ export class HumanTaskComponent implements OnInit {
       /* Calculate the position of the lens: */
       x = pos.x - lens.offsetWidth / 2;
       y = pos.y - lens.offsetHeight / 2;
+
       /* Prevent the lens from being positioned outside the image: */
       if (x > img.width - lens.offsetWidth) {
         // if (lens.parentNode) {
@@ -321,9 +342,18 @@ export class HumanTaskComponent implements OnInit {
       /* Set the position of the lens: */
       lens.style.left = x + 'px';
       lens.style.top = y + 'px';
-      lens.style.border = 'red';
+
       /* Display what the lens "sees": */
-      result.style.backgroundPosition = '-' + x * cx + 'px -' + y * cy + 'px';
+      // document.getElementById('myresult')?.removeAttribute('viewBox');
+      // document
+      //   .getElementById('myresult')
+      //   ?.setAttribute(
+      //     'viewBox',
+      //     `${x} ${y} ${window.innerWidth + 20 - 50} ${
+      //       window.innerHeight - 20 - 88
+      //     }`
+      //   );
+      // result.style.backgroundPosition = '-' + x * cx + 'px -' + y * cy + 'px';
     }
     function getCursorPos(e: any) {
       var a,
@@ -340,11 +370,266 @@ export class HumanTaskComponent implements OnInit {
       // /* Consider any page scrolling: */
       x = x - window.pageXOffset;
       y = y - window.pageYOffset;
+      document.getElementById('myresult')?.removeAttribute('viewBox');
+      document
+        .getElementById('myresult')
+        ?.setAttribute(
+          'viewBox',
+          `${x} ${y} ${window.innerWidth + 20 - 50} ${
+            window.innerHeight - 20 - 88
+          }`
+        );
       return { x: x, y: y };
     }
   }
 
-  onOver() {
-    console.log('running');
+  // zoom in zoom out
+  //   var svgCanvas = document.getElementById("canvas");
+  // var viewPort = document.getElementById("viewport");
+  drag = false;
+  offset = { x: 0, y: 0 };
+  factor = 0.1;
+  matrix = new DOMMatrix();
+  mouseWheel(event: WheelEvent) {
+    let viewPort = document.getElementById('viewport') as HTMLElement;
+    var zoom = event.deltaY > 0 ? -1 : 1;
+    var scale = 1 + this.factor * zoom;
+    this.offset = {
+      x: event.offsetX,
+      y: event.offsetY,
+    };
+    this.matrix.preMultiplySelf(
+      new DOMMatrix()
+        .translateSelf(this.offset.x, this.offset.y)
+        .scaleSelf(scale, scale)
+        .translateSelf(-this.offset.x, -this.offset.y)
+    );
+    viewPort.style.transform = this.matrix.toString();
   }
+
+  // zoom in zoom out functionality ********************- using SCALING
+  // refreshTopology() {
+  //   this.topologyData = JSON.parse(JSON.stringify(this.topologyViewData));
+  //   this.actualZoom = 1;
+  //   this.svgGrid.nativeElement.style.transform = `scale(1)`;
+  //   this.mouseWheelActivity = null;
+  //   this.getCircuitCoordinate();
+  // }
+  // /**
+  //  * @description this method use to manage zoom in and zoom out on mouseWheel
+  //  * @author Jagdish
+  //  * @params {wheelEvent: WheelEvent}
+  //  * @retunrs :void
+  //  */
+  // mouseWheel(wheelEvent: WheelEvent) {
+  //   this.hideSideDetails();
+  //   wheelEvent?.stopPropagation();
+
+  //   const zoomScale = 1.1;
+  //   let zoomDirection = wheelEvent.deltaY;
+  //   if (this.mouseWheelActivity) {
+  //     wheelEvent = this.mouseWheelActivity;
+  //   } else {
+  //     this.mouseWheelActivity = wheelEvent;
+  //   }
+
+  //   let zoomX = wheelEvent.offsetX;
+  //   let zoomY = wheelEvent.offsetY;
+
+  //   let currentScale: any = this.svgGrid.nativeElement.style.transform;
+  //   currentScale = currentScale
+  //     ? parseFloat(currentScale.split('(')[1].split(')')[0])
+  //     : 1;
+
+  //   let newScale: number;
+
+  //   if (zoomDirection <= 0) {
+  //     newScale = currentScale * zoomScale;
+  //   } else {
+  //     if (currentScale <= 1) {
+  //       this.mouseWheelActivity = null;
+  //       return;
+  //     }
+  //     newScale = currentScale / zoomScale;
+  //   }
+
+  //   this.svgGrid.nativeElement.style.transform = `scale(${newScale})`;
+
+  //   const transformOriginX =
+  //     (zoomX / this.svgGrid.nativeElement.clientWidth) * 100;
+  //   const transformOriginY =
+  //     (zoomY / this.svgGrid.nativeElement.clientHeight) * 100;
+  //   this.svgGrid.nativeElement.style.transformOrigin = `${transformOriginX}% ${transformOriginY}%`;
+  // }
+
+  // zoomIn() {
+  //   this.applyZoom(-1);
+  // }
+
+  // zoomOut() {
+  //   this.applyZoom(1);
+  // }
+  /**
+   * @description this method use to manage zoom in and zoom out on button click
+   * @author Jagdish
+   * @params {direction: number}
+   * @retunrs :void
+   */
+  // applyZoom(direction: number) {
+  //   this.hideSideDetails();
+
+  //   const zoomScale = 1.1;
+  //   let zoomDirection = direction;
+  //   let wheelEvent = this.mouseWheelActivity || {
+  //     offsetX: this.svgGrid.nativeElement.clientWidth / 2,
+  //     offsetY: this.svgGrid.nativeElement.clientHeight / 2,
+  //   };
+
+  //   if (!this.mouseWheelActivity) {
+  //     this.mouseWheelActivity = wheelEvent;
+  //   }
+
+  //   let zoomX = wheelEvent.offsetX;
+  //   let zoomY = wheelEvent.offsetY;
+
+  //   let currentScale: any = this.svgGrid.nativeElement.style.transform;
+  //   currentScale = currentScale
+  //     ? parseFloat(currentScale.split('(')[1].split(')')[0])
+  //     : 1;
+
+  //   let newScale: number;
+
+  //   if (zoomDirection <= 0) {
+  //     newScale = currentScale * zoomScale;
+  //   } else {
+  //     // Prevent zooming out too much
+  //     if (currentScale <= 1) {
+  //       this.mouseWheelActivity = null;
+  //       return;
+  //     }
+  //     newScale = currentScale / zoomScale;
+  //   }
+
+  //   this.svgGrid.nativeElement.style.transform = `scale(${newScale})`;
+
+  //   const transformOriginX =
+  //     (zoomX / this.svgGrid.nativeElement.clientWidth) * 100;
+  //   const transformOriginY =
+  //     (zoomY / this.svgGrid.nativeElement.clientHeight) * 100;
+  //   this.svgGrid.nativeElement.style.transformOrigin = `${transformOriginX}% ${transformOriginY}%`;
+  // }
+
+  /// zoom in and out using Approach using Viewbox*************************%
+  // mouseWheel(wheelEvent: WheelEvent) {
+  //   this.hideSideDetails();
+  //   wheelEvent?.stopPropagation();
+  //   const zoomScale = 1.1;
+  //   let zoomDirection = wheelEvent.deltaY;
+  //   if (this.mouseWheelActivity) {
+  //     wheelEvent = this.mouseWheelActivity;
+  //   } else {
+  //     this.mouseWheelActivity = wheelEvent;
+  //   }
+
+  //   let zoomX = wheelEvent.offsetX;
+  //   let zoomY = wheelEvent.offsetY;
+
+  //   let scaledViewBoxWidth;
+  //   let scaledViewBoxHeight;
+  //   let scaledViewBoxX;
+  //   let scaledViewBoxY;
+  //   let zoomLeftFraction = zoomX / this.svgGrid.nativeElement.clientWidth;
+  //   let zoomTopFraction = zoomY / this.svgGrid.nativeElement.clientHeight;
+  //   let [viewboxX, viewboxY, viewboxWidth, viewboxHeight]: any = this.svgGrid.nativeElement
+  //     .getAttribute("viewBox")
+  //     ?.split(" ")
+  //     .map((s) => parseFloat(s));
+
+  //   if (zoomDirection <= 0) {
+  //     this.actualZoom++;
+  //     scaledViewBoxWidth = viewboxWidth / zoomScale;
+  //     scaledViewBoxHeight = viewboxHeight / zoomScale;
+
+  //     scaledViewBoxX = viewboxX + (viewboxWidth - scaledViewBoxWidth) * zoomLeftFraction;
+  //     scaledViewBoxY = viewboxY + (viewboxHeight - scaledViewBoxHeight) * zoomTopFraction;
+  //   } else {
+  //     if (this.actualZoom <= 1) {
+  //       this.mouseWheelActivity = null;
+  //       return;
+  //     }
+  //     this.actualZoom--;
+  //     scaledViewBoxWidth = viewboxWidth * zoomScale;
+  //     scaledViewBoxHeight = viewboxHeight * zoomScale;
+
+  //     scaledViewBoxX = viewboxX - (scaledViewBoxWidth - viewboxWidth) * zoomLeftFraction;
+  //     scaledViewBoxY = viewboxY - (scaledViewBoxHeight - viewboxHeight) * zoomTopFraction;
+  //   }
+  //   const scaledViewBox: any = [scaledViewBoxX, scaledViewBoxY, scaledViewBoxWidth, scaledViewBoxHeight].map((s) => s.toFixed(2)).join(" ");
+  //   this.svgGrid.nativeElement.setAttribute("viewBox", scaledViewBox);
+
+  //   this.currentViewboxToSvgRatio = scaledViewBoxWidth / this.svgGrid.nativeElement.clientWidth;
+  // }
+
+  // zoom in zoom out on view box;***********************
+
+  // Handle zooming in
+  // zoomIn() {
+  //   this.changeZoom(-1); // Zoom in on button click
+  // }
+
+  // // Handle zooming out
+  // zoomOut() {
+  //   this.changeZoom(1); // Zoom out on button click
+  // }
+
+  // maxZoom: number = 5;
+  // minZoom: number = 1;
+  // Adjust the zoom level and update the viewBox
+  // changeZoom(zoomDirection: number) {
+  //   let zoomScale = 1.1;
+  //   let scaledViewBoxX;
+  //   let scaledViewBoxY;
+  //   let [viewboxX, viewboxY, viewboxWidth, viewboxHeight]: any = this.svgGrid.nativeElement
+  //     .getAttribute("viewBox")
+  //     ?.split(" ")
+  //     .map((s) => parseFloat(s)); // Get current viewBox values
+
+  //   // Calculate the new zoom level
+  //   if (zoomDirection < 0) {
+  //     // Zoom in
+  //     // if (this.actualZoom < this.maxZoom) {
+  //     this.actualZoom++;
+  //     viewboxWidth /= zoomScale;
+  //     viewboxHeight /= zoomScale;
+  //     scaledViewBoxX = viewboxX + (viewboxWidth - viewboxWidth / zoomScale) / 2;
+  //     scaledViewBoxY = viewboxY + (viewboxHeight - viewboxHeight / zoomScale) / 2;
+  //     // } else {
+  //     //   return;
+  //     // }
+  //   } else {
+  //     // Zoom out
+  //     if (this.actualZoom > this.minZoom) {
+  //       this.actualZoom--;
+  //       viewboxWidth = viewboxWidth * zoomScale;
+  //       viewboxHeight = viewboxHeight * zoomScale;
+  //       scaledViewBoxX = viewboxX + (viewboxWidth / zoomScale - viewboxWidth) / 2;
+  //       scaledViewBoxY = viewboxY + (viewboxHeight / zoomScale - viewboxHeight) / 2;
+  //     } else {
+  //       return;
+  //     }
+  //   }
+
+  //   // Adjust the viewBox position (minX and minY) to keep the zoom centered
+  //   const centerX = viewboxWidth / 2;
+  //   const centerY = viewboxHeight / 2;
+
+  //   // Set the new minX and minY to keep the zoom centered
+
+  //   // Set the new viewBox for the SVG
+
+  //   const scaledViewBox: any = [scaledViewBoxX, scaledViewBoxY, viewboxWidth, viewboxHeight].map((s) => s.toFixed(2)).join(" ");
+  //   this.svgGrid.nativeElement.setAttribute("viewBox", scaledViewBox);
+
+  //   this.currentViewboxToSvgRatio = viewboxWidth / this.svgGrid.nativeElement.clientWidth;
+  // }
 }
