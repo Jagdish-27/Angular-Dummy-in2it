@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let item of menuItems">
+    <a [routerLink]="item.route">{{ item.label }}</a>
+    <app-menu *ngIf="item.submenu" [menuItems]="item.submenu"></app-menu>
+  </li>
+</ul>

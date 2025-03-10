@@ -1,0 +1,11 @@
+<div class="comment">
+  <div class="author">{{ comment.author }}</div>
+  <div class="text">{{ comment.text }}</div>
+  <button (click)="addReply()">Add Reply</button>
+  <ul>
+    <app-comment
+      *ngFor="let reply of comment.replies"
+      [comment]="reply"
+    ></app-comment>
+  </ul>
+</div>

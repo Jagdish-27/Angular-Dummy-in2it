@@ -15,6 +15,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AgGridModule } from 'ag-grid-angular';
 import { SharedModule } from '../shared/shared.module';
+import { TreeComponent } from './components/tree/tree.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 @NgModule({
@@ -24,6 +27,9 @@ import { SharedModule } from '../shared/shared.module';
     CardsComponent,
     TaskListDataComponent,
     SideFormComponent,
+    TreeComponent,
+    CommentComponent,
+    MenuComponent,
   ],
   imports: [
     CommonModule,

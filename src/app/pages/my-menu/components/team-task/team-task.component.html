@@ -1,8 +1,16 @@
 <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
   <div class="form-group">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" [(ngModel)]="userFormObj.name" #nameInput="ngModel" required minlength="3"
-      maxlength="20">
+    <input
+      type="text"
+      id="name"
+      name="name"
+      [(ngModel)]="userFormObj.name"
+      #nameInput="ngModel"
+      required
+      minlength="3"
+      maxlength="20"
+    />
     <app-error [control]="nameInput"></app-error>
     <!-- <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)"
            class="text-danger">
@@ -19,7 +27,15 @@
   </div>
   <div class="form-group">
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" [(ngModel)]="userFormObj.email" #emailInput="ngModel" required email>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="userFormObj.email"
+      #emailInput="ngModel"
+      required
+      email
+    />
     <app-error [control]="emailInput"></app-error>
     <!-- <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)"
            class="text-danger">
@@ -33,17 +49,34 @@
     -->
   </div>
   <ng-container *ngFor="let control of getUserFormArray; let i = index">
-    <div [ngModelGroup]="'Address'+i" class="form-group">
+    <div [ngModelGroup]="'Address' + i" class="form-group">
       <label for="city">City:</label>
-      <input type="text" id="city" name="city" [(ngModel)]="control.city" #cityInput="ngModel" required>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        [(ngModel)]="control.city"
+        #cityInput="ngModel"
+        required
+      />
       <app-error [control]="cityInput"></app-error>
       <label for="city">Country:</label>
-      <input type="text" id="country" name="country" [(ngModel)]="control.country" #countryInput="ngModel" required>
+      <input
+        type="text"
+        id="country"
+        name="country"
+        [(ngModel)]="control.country"
+        #countryInput="ngModel"
+        required
+      />
       <app-error [control]="countryInput"></app-error>
-      <button type="button" (click)="deleteField(i)">Delete</button> <br>
+      <button type="button" (click)="deleteField(i)">Delete</button> <br />
     </div>
   </ng-container>
   <button (click)="addField()" type="button">Add</button>
   <button type="submit">Submit</button>
   <!-- [disabled]="!myForm.valid" -->
 </form>
+<app-tree [node]="treeStructure_data"></app-tree>
+<app-comment [comment]="comment_data"></app-comment>
+<app-menu [menuItems]="menuItems_data"></app-menu>
