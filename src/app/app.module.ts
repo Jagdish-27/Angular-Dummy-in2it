@@ -14,7 +14,6 @@ import { allIcons } from 'angular-feather/icons';
 // import { AgGridModule } from 'ag-grid-angular';
 // import { AgGridTableComponent } from './components/ag-grid-table/ag-grid-table.component';
 
-
 // import { AmChartsModule } from '@amcharts/amcharts4-angular';
 
 @NgModule({
@@ -33,6 +32,6 @@ import { allIcons } from 'angular-feather/icons';
     // AgGridModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

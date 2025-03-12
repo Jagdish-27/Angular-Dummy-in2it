@@ -25,7 +25,7 @@ import { StatusRendererComponent } from './cell-renders/status-renderer/status-r
     InputEditComponent,
     ErrorComponent,
     AngularCalenderComponent,
-    StatusRendererComponent
+    StatusRendererComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +38,6 @@ import { StatusRendererComponent } from './cell-renders/status-renderer/status-r
       useFactory: adapterFactory,
     }),
   ],
-  exports:[AgGridTableComponent,ErrorComponent,AngularCalenderComponent]
+  exports: [AgGridTableComponent, ErrorComponent, AngularCalenderComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

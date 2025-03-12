@@ -18,7 +18,8 @@ import { SharedModule } from '../shared/shared.module';
 import { TreeComponent } from './components/tree/tree.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { MenuComponent } from './components/menu/menu.component';
-
+import { SearchComponent } from './components/search/search.component';
+import { HighlighSearchPipe } from 'src/app/pipes/highligh-search.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { MenuComponent } from './components/menu/menu.component';
     TreeComponent,
     CommentComponent,
     MenuComponent,
+    SearchComponent,
+    HighlighSearchPipe,
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,6 @@ import { MenuComponent } from './components/menu/menu.component';
     FormsModule,
     AgGridModule,
     SharedModule,
-  ]
+  ],
 })
-export class MyMenuModule { }
+export class MyMenuModule {}
