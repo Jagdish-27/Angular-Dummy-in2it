@@ -73,6 +73,7 @@
       <button type="button" (click)="deleteField(i)">Delete</button> <br />
     </div>
   </ng-container>
+
   <button (click)="addField()" type="button">Add</button>
   <button type="submit">Submit</button>
   <!-- [disabled]="!myForm.valid" -->
@@ -80,4 +81,18 @@
 <app-tree [node]="treeStructure_data"></app-tree>
 <app-comment [comment]="comment_data"></app-comment>
 <app-menu [menuItems]="menuItems_data"></app-menu>
-<app-search></app-search>
+<app-search></app-search> {{ value }}
+<select [(ngModel)]="value" (change)="onSelectChange($event)">
+  <option value="">Action</option>
+  <option value="Add">Add</option>
+  <option value="Export">Export</option>
+  <option value="Scan">Scan</option>
+</select>
+<input
+  #myInputFile
+  id="files"
+  name="files"
+  (change)="onSelectFile($event)"
+  type="file"
+/>
+<a download="" style="cursor: pointer">Download Sample file</a>

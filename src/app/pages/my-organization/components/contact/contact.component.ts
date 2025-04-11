@@ -80,12 +80,11 @@ export class ContactComponent implements OnInit {
 
   filterAllOrgAndContacts: any;
 
-  gridOptions!:GridOptions;
+  gridOptions!: GridOptions;
 
   ngOnInit(): void {
     this.countryCodeList = this.contactService.country_Code;
 
-    
     // localStorage.setItem('tabs', JSON.stringify([]));
     this.route.url.subscribe((url) => {
       this.serverService.setHeadTitle({
@@ -94,22 +93,16 @@ export class ContactComponent implements OnInit {
       });
     });
 
-   
-
-
     this.setDataInitialy();
     this.gridOptions = {
-      context:{
-        componentParent:this,
-        parent:'allContacts'
-      }
-    }
-
+      context: {
+        componentParent: this,
+        parent: 'allContacts',
+      },
+    };
 
     // this.serverService.setCurrentTabId(0);
     // this.router.navigate(['my-organization/contact']);
-
-    
   }
 
   setDataInitialy() {
@@ -151,11 +144,12 @@ export class ContactComponent implements OnInit {
     this.currentActiveVal = value;
     if (this.currentActiveVal !== 'all') {
       this.currentActiveRole = false;
-      this.contact_form.controls['organization'].patchValue(this.currentActiveVal);
+      this.contact_form.controls['organization'].patchValue(
+        this.currentActiveVal
+      );
       this.contact_form.controls['organization'].disable();
       this.selected_contact_data = [];
     } else {
-
       this.contact_form.controls['organization'].enable();
       this.contact_form.controls['organization'].patchValue('');
 
@@ -225,7 +219,6 @@ export class ContactComponent implements OnInit {
     }
   }
 
-  
   isPhoneTrue(i: number) {
     return this.other_medium_array.at(i).get('medium')?.value == 'Phone';
   }
@@ -244,7 +237,8 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     if (this.contact_form.valid) {
-      const selectedOrganization = this.contact_form.controls['organization'].value;
+      const selectedOrganization =
+        this.contact_form.controls['organization'].value;
 
       let localStorageItems = JSON.parse(
         localStorage.getItem('Organization_Data') || '[]'
@@ -299,7 +293,6 @@ export class ContactComponent implements OnInit {
             value.organization === selectedOrganization
         ) as OrganizationData;
 
-        
         const index = organization.contacs.findIndex(
           (item) => item.id === this.contact_form.controls['id'].value
         );
@@ -541,7 +534,7 @@ export class ContactComponent implements OnInit {
         this.contact_form.controls['role'].enable();
         this.currentActiveRole = false;
       }
-      this.contact_form.controls['organization'].disable()
+      this.contact_form.controls['organization'].disable();
     }
   }
 
@@ -654,28 +647,27 @@ export class ContactComponent implements OnInit {
     searchValue = searchValue.toLowerCase();
 
     return this.allOrgAndContacts.filter((data: any) => {
-
       return (
         data.organization.toLowerCase().includes(searchValue) ||
         data.firstName.toLowerCase().includes(searchValue) ||
         data.role.toLowerCase().includes(searchValue) ||
-        data.email.toLowerCase().includes(searchValue) || data.phone.toString().toLowerCase().includes(searchValue) 
+        data.email.toLowerCase().includes(searchValue) ||
+        data.phone.toString().toLowerCase().includes(searchValue)
       );
     });
   }
 
   colDefsTable: ColDef[] = [
-    { headerCheckboxSelection: true, checkboxSelection: true, maxWidth: 30, },
+    { headerCheckboxSelection: true, checkboxSelection: true, maxWidth: 30 },
     {
       headerName: 'Organization',
       field: 'organization',
       cellRenderer: LinkButtonComponent,
       filter: 'agTextColumnFilter',
-     
+
       // cellRendererParams: {
       //   onOrgClick: this.onRendererOrgClick.bind(this),
       // },
-      
     },
     {
       headerName: 'Name',
@@ -692,9 +684,8 @@ export class ContactComponent implements OnInit {
       field: 'role',
     },
 
-    { headerName: 'Email', field: 'email', },
-    { headerName: 'Phone', field: 'phone',
-     },
+    { headerName: 'Email', field: 'email' },
+    { headerName: 'Phone', field: 'phone' },
   ];
 
   // onRendererOrgClick(params: any) {

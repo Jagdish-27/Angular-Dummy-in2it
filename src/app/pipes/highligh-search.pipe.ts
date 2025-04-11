@@ -19,6 +19,7 @@ export class HighlighSearchPipe implements PipeTransform {
         searchText +
         '</div>'
     );
+
     return valueAfterReplace;
   }
 }

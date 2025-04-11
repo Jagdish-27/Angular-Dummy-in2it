@@ -8,9 +8,8 @@ describe('HumanTaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HumanTaskComponent ]
-    })
-    .compileComponents();
+      declarations: [HumanTaskComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

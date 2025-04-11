@@ -86,4 +86,77 @@ export class TeamTaskComponent implements OnInit {
   runSettingsOnStart() {
     console.log('log from app initializer');
   }
+  value: string = '';
+  onSelectChange(event: any) {
+    if (event.target.value == 'Add') {
+      // this.value = '';
+    }
+    setTimeout(() => {
+      this.value = '';
+    });
+    // this.onSelectChange('');
+  }
+
+  fileSelected: boolean = false;
+  file: any = '';
+  fileName: string = '';
+  errorFileName: any = '';
+
+  onSelectFile(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      let fileInput = event.target;
+      let filePath = fileInput.value;
+      let allowExtensions = /(\.xlsx|xls)$/i;
+      if (!allowExtensions.exec(filePath)) {
+        alert('invalid Format.');
+        // Swal.fire({ text: 'invalid Format.', confirmButtonText: 'Ok' }).then(
+        //   () => {}
+        // );
+        fileInput.value = '';
+        this.file = null;
+        this.fileName = '';
+        this.fileSelected = false;
+      } else {
+        this.fileName = event.target.files[0].name;
+        this.file = event.target.files[0];
+        this.fileSelected = true;
+        fileInput.value = '';
+      }
+    }
+  }
+
+  // downloadSampleFile() {
+  //   this.orgService.getOrgGroupTemplateDownload().subscribe({
+  //     next: (res: any) => {
+  //       saveAs(res, 'Org_sample.xlsx');
+  //     },
+  //     error: (err: any) => {
+  //       Swal.fire({ text: err.error.errorMsg, confirmButtonText: 'OK' });
+  //     },
+  //   });
+  // }
+
+  // uploadOrgGroup() {
+  //   const uploadedFile = new FormData();
+  //   uploadedFile.append(
+  //     'file',
+  //     new Blob([this.file], { type: 'xls/xlsx' }),
+  //     this.fileName
+  //   );
+  //   this.orgService.bulkUploadOrgGroup(uploadedFile).subscribe({
+  //     next: (res: any) => {
+  //       this.bulkUploadInProgress = false;
+  //       this.errorView = true;
+  //       this.errorFileName = res.body?.filename;
+  //       this.successCount = res.body?.Imported;
+  //       this.errorCount = res.body?.NotImported;
+  //       this.orgService.setUpdateLeftPannet(true);
+  //     },
+  //     error: (err: any) => {
+  //       this.bulkUploadInProgress = false;
+  //       this.uploadView = true;
+  //       Swal.fire({ text: err.error.errorMsg, confirmButtonText: 'Ok' });
+  //     },
+  //   });
+  // }
 }

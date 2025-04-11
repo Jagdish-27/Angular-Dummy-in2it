@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-enum DragOperationTypes {
+export enum DragOperationTypes {
   Shape = 0,
   Grid = 1,
 }
