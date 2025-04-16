@@ -290,7 +290,7 @@ export class TeamTaskComponent implements OnInit {
    * @returns void
    */
   selectItemsFromMultiSelect(event: any, formControl: any, _type?: any) {
-    formControl.userFormObj = event;
+    formControl.sports = event;
     // formControl.patchValue(event);
     // if (!type || type != 'sites') {
     //   this.getAllFilteredSites();
