@@ -52,6 +52,33 @@
     <app-error [control]="nameInput"></app-error>
   </div>
   <div class="form-group">
+    <label for="name">Fav Sports:</label>
+    <!-- <app-multiselect-dropdown
+              [dropdownList]="organizationList"
+              [dropdownSettings]="selectSettingsForOrganization"
+              [selectedItems]="configurationForm.controls.tenants.value"
+              [placeholder]="'Select Organizations'"
+              (onItemsChange)="
+                selectItemsFromMultiSelect(
+                  $event,
+                  configurationForm.controls.tenants
+                )
+              "
+            >
+            </app-multiselect-dropdown> -->
+
+    <app-multi-select-dropdown
+      [placeholder]="'Select Favourite Sports'"
+      [dropdownList]="sportsList"
+      [selectedItems]="userFormObj.sports"
+      [dropdownSettings]="selectSettingsForSports"
+      (onItemsChange)="selectItemsFromMultiSelect($event, userFormObj)"
+    ></app-multi-select-dropdown>
+
+    <app-error [control]="nameInput"></app-error>
+  </div>
+
+  <div class="form-group">
     <label for="email">Email:</label>
     <input
       type="email"

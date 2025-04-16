@@ -17,6 +17,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AngularCalenderComponent } from './angular-calender/angular-calender.component';
 import { StatusRendererComponent } from './cell-renders/status-renderer/status-renderer.component';
 import { SingleSelectDropdownComponent } from './single-select-dropdown/single-select-dropdown.component';
+import { MultiSelectDropdownComponent } from './multi-select-dropdown/multi-select-dropdown.component';
+
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { SingleSelectDropdownComponent } from './single-select-dropdown/single-s
     AngularCalenderComponent,
     StatusRendererComponent,
     SingleSelectDropdownComponent,
+    MultiSelectDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -39,12 +43,14 @@ import { SingleSelectDropdownComponent } from './single-select-dropdown/single-s
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   exports: [
     AgGridTableComponent,
     ErrorComponent,
     AngularCalenderComponent,
     SingleSelectDropdownComponent,
+    MultiSelectDropdownComponent,
   ],
 })
 export class SharedModule {}

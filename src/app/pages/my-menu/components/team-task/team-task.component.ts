@@ -93,11 +93,27 @@ export class TeamTaskComponent implements OnInit {
     { id: 'Other', name: 'Other' },
   ];
 
+  sportsList: any[] = [
+    { id: 1, name: 'Cricket' },
+    { id: 2, name: 'Foot Ball' },
+    { id: 3, name: 'Hockey' },
+    { id: 4, name: 'Kabaddi' },
+    { id: 5, name: 'Volly Ball' },
+    { id: 6, name: 'Table Tennis' },
+  ];
+
   userFormObj = {
     name: '',
     gender: '',
+    sports: [],
     email: '',
     address: [{ city: '', country: '' }],
+  };
+
+  selectSettingsForSports = {
+    idField: 'id',
+    textField: 'name',
+    itemsShowLimit: 3,
   };
 
   ngOnInit(): void {
@@ -266,4 +282,18 @@ export class TeamTaskComponent implements OnInit {
   //     this.getStateList(event.id);
   //   }
   // }
+
+  /**
+   * @description method to update  multiple select control.
+   * @author Jagdish
+   * @param {Event, formControl}
+   * @returns void
+   */
+  selectItemsFromMultiSelect(event: any, formControl: any, _type?: any) {
+    formControl.userFormObj = event;
+    // formControl.patchValue(event);
+    // if (!type || type != 'sites') {
+    //   this.getAllFilteredSites();
+    // }
+  }
 }
