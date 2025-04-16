@@ -16,6 +16,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AngularCalenderComponent } from './angular-calender/angular-calender.component';
 import { StatusRendererComponent } from './cell-renders/status-renderer/status-renderer.component';
+import { SingleSelectDropdownComponent } from './single-select-dropdown/single-select-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { StatusRendererComponent } from './cell-renders/status-renderer/status-r
     ErrorComponent,
     AngularCalenderComponent,
     StatusRendererComponent,
+    SingleSelectDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,11 @@ import { StatusRendererComponent } from './cell-renders/status-renderer/status-r
       useFactory: adapterFactory,
     }),
   ],
-  exports: [AgGridTableComponent, ErrorComponent, AngularCalenderComponent],
+  exports: [
+    AgGridTableComponent,
+    ErrorComponent,
+    AngularCalenderComponent,
+    SingleSelectDropdownComponent,
+  ],
 })
 export class SharedModule {}

@@ -26,6 +26,32 @@
       </div> -->
   </div>
   <div class="form-group">
+    <label for="name">Gender:</label>
+    <!-- app-singleselect-dropdown
+          placeholderName="Select Site Group"
+          [optionsList]="siteGroupDropdown"
+          [selectedItem]="siteForm.controls.siteGroup.value"
+          (selectItem)="updateSingleSelectControl($event, siteForm.controls.siteGroup)"></app-singleselect-dropdown> -->
+
+    <app-single-select-dropdown
+      placeholderName="Select Gender"
+      [optionsList]="genderList"
+      [selectedItem]="userFormObj.gender"
+      (selectItem)="updateSingleSelectControl($event, userFormObj)"
+    ></app-single-select-dropdown>
+    <!-- <input
+      type="text"
+      id="name"
+      name="name"
+      [(ngModel)]="userFormObj.gender"
+      #nameInput="ngModel"
+      required
+      minlength="3"
+      maxlength="20"
+    /> -->
+    <app-error [control]="nameInput"></app-error>
+  </div>
+  <div class="form-group">
     <label for="email">Email:</label>
     <input
       type="email"
@@ -96,3 +122,31 @@
   type="file"
 />
 <a download="" style="cursor: pointer">Download Sample file</a>
+
+<ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+  <ng-wizard-step [title]="'Step 1'" [description]="'Basic Info'">
+    <span>Step 1 content</span>
+  </ng-wizard-step>
+
+  <ng-wizard-step [title]="'Step 2'" [description]="'Account Setup'">
+    <span>Step 2 content</span>
+  </ng-wizard-step>
+
+  <ng-wizard-step [title]="'Step 3'" [description]="'Profile Details'">
+    <span>Step 3 content</span>
+  </ng-wizard-step>
+
+  <ng-wizard-step [title]="'Step 4'" [description]="'Review and Finish'">
+    <span>Step 4 content</span>
+  </ng-wizard-step>
+</ng-wizard>
+<div>
+  <button class="btn btn-primary mx-3" (click)="showPrevStep()">
+    <i-feather name="chevrons-left" class="feather_icon_10 ms-1"></i-feather>
+    Back
+  </button>
+  <button class="btn btn-primary" (click)="showNextStep()">
+    Next
+    <i-feather name="chevrons-right" class="feather_icon_10 ms-1"></i-feather>
+  </button>
+</div>

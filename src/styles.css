@@ -6,6 +6,14 @@
 @import 'ag-grid-community/styles/ag-grid.css';
 @import 'ag-grid-community/styles/ag-theme-alpine.css';
 
+@import '~ng-wizard/themes/ng_wizard.min.css';
+
+/* Optional */
+/* If a theme other than default is used, the css file for that theme is required. */
+@import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_circles.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_dots.min.css';
+
 
 *{
     margin: 0;

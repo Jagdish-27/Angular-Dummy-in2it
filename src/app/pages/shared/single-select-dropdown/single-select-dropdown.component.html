@@ -1,0 +1,117 @@
+<div
+  class="acsingleselect"
+  [ngClass]="disabledField == true ? 'disableselect' : ''"
+>
+  <div class="singleSelect" (click)="opendropdown()">
+    <input
+      type="text"
+      class="selecteditem form-control"
+      [(ngModel)]="showselectedItem[selectSettings.textField]"
+      #selectedName="ngModel"
+      [placeholder]="placeholderName"
+      [ngStyle]="{ height: heightPx + 'vmax' }"
+      [required]="requiredField"
+      readonly
+    />
+    <div class="togglebutton">
+      <span class="dropdown-down" *ngIf="!showdropdown"></span>
+      <span class="dropdown-up" *ngIf="showdropdown"></span>
+    </div>
+  </div>
+  <div
+    class="text-danger small"
+    *ngIf="(selectedName.touched || selectedName.dirty) && selectedName.errors?.['required']"
+  >
+    This field is manadatory.
+  </div>
+  <div class="dropdown-list" *ngIf="showdropdown">
+    <div
+      class="d-flex justify-content-between fix_dropdown py-1"
+      *ngIf="isShowAdditionalTemplate"
+    >
+      <h4 class="locate_site mb-0">
+        {{ additionalTemplateTextObj?.firstText }}
+      </h4>
+      <a class="plus cursor-pointer" (click)="clickOnAdditionalTemplate()"
+        ><i-feather name="plus" class="btn-icon ms-2 fw-light plus"></i-feather>
+        {{ additionalTemplateTextObj.secondText }}
+      </a>
+    </div>
+
+    <ul class="search_input" *ngIf="searchEnable && optionsList?.length > 0">
+      <li>
+        <input
+          type="text"
+          placeholder="Search..."
+          (click)="$event.stopPropagation()"
+          (keyup)="searchdata($event)"
+        />
+      </li>
+    </ul>
+    <ng-container *ngIf="singleFieldDisable">
+      <ul class="dataList" id="style-4" *ngIf="dropdownValues?.length > 0">
+        <li
+          class="data-option"
+          *ngFor="let dropdownvalue of dropdownValues"
+          (click)="selectData(dropdownvalue)"
+          [ngClass]="[
+            dropdownvalue[selectSettings.idField] ==
+            showselectedItem[selectSettings.idField]
+              ? 'bg-primary'
+              : '',
+            dropdownvalue[selectSettings.textField] == listTextForDisable &&
+            listItemDisable
+              ? 'disabledClass'
+              : ''
+          ]"
+        >
+          {{ dropdownvalue[selectSettings.textField] }}
+          <span
+            class="tooltip"
+            *ngIf="
+              dropdownvalue[selectSettings.textField] == listTextForDisable &&
+              listItemDisable
+            "
+          >
+            <i-feather class="feather_icon_11 ms-2" name="info"></i-feather>
+            <span class="tooltiptext"
+              >Another contact exists as Org SPOC for this organization. Remove
+              them as SPOC to set this contact as the new SPOC.</span
+            >
+          </span>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="!singleFieldDisable">
+      <ul class="dataList" id="style-4" *ngIf="dropdownValues?.length > 0">
+        <li
+          class="data-option"
+          *ngFor="let dropdownvalue of dropdownValues"
+          (click)="selectData(dropdownvalue)"
+          [ngClass]="[
+            dropdownvalue[selectSettings.idField] ==
+            showselectedItem[selectSettings.idField]
+              ? 'bg-primary'
+              : '',
+            dropdownvalue[selectSettings.isFieldDisabled] ? 'disabledClass' : ''
+          ]"
+        >
+          {{ dropdownvalue[selectSettings.textField] }}
+          <span
+            class="tooltip"
+            *ngIf="dropdownvalue[selectSettings.isFieldDisabled]"
+          >
+            <i-feather class="feather_icon_11 ms-2" name="info"></i-feather>
+            <span class="tooltiptext"
+              >Another contact exists as Org SPOC for this organization. Remove
+              them as SPOC to set this contact as the new SPOC.</span
+            >
+          </span>
+        </li>
+      </ul>
+    </ng-container>
+    <div class="px-1 text-center py-2" *ngIf="dropdownValues?.length == 0">
+      No Data To Select
+    </div>
+  </div>
+</div>

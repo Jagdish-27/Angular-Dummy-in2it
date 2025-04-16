@@ -1,13 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
+import { STEP_STATE, NgWizardConfig, THEME, NgWizardService } from 'ng-wizard';
+// import { NgxSpinnerService } from 'ngx-spinner';
+// import Swal from 'sweetalert2';
 @Component({
   selector: 'app-team-task',
   templateUrl: './team-task.component.html',
   styleUrls: ['./team-task.component.css'],
 })
 export class TeamTaskComponent implements OnInit {
-  constructor() {}
+  //#region mirror highlight
+  stepStates = {
+    normal: STEP_STATE.normal,
+    disabled: STEP_STATE.disabled,
+    error: STEP_STATE.error,
+    hidden: STEP_STATE.hidden,
+  };
+  config: NgWizardConfig = {
+    selected: 0,
+    theme: THEME.dots,
+    anchorSettings: {
+      anchorClickable: false,
+    },
+    toolbarSettings: {
+      showNextButton: false,
+      showPreviousButton: false,
+    },
+  };
+
+  currentStepIndex!: number;
+
+  constructor(
+    private ngWizardService: NgWizardService // private spinner: NgxSpinnerService
+  ) {}
 
   name: string = 'rohit';
 
@@ -60,13 +85,50 @@ export class TeamTaskComponent implements OnInit {
     },
   ];
 
+  // gender drop down list.. for single select
+
+  genderList: any[] = [
+    { id: 'Male', name: 'Male' },
+    { id: 'Female', name: 'Female' },
+    { id: 'Other', name: 'Other' },
+  ];
+
   userFormObj = {
     name: '',
+    gender: '',
     email: '',
     address: [{ city: '', country: '' }],
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.spinner.show();
+    // setTimeout(() => {
+    //   /** spinner ends after 5 seconds */
+    //   this.spinner.hide();
+    //   Swal.fire({
+    //     title: 'Are you sure?',
+    //     text: 'You will not be able to recover this imaginary file!',
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonText: 'Yes, delete it!',
+    //     cancelButtonText: 'No, keep it',
+    //   }).then(
+    //     function () {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'Your imaginary file has been deleted.',
+    //         'success'
+    //       );
+    //     },
+    //     function (dismiss) {
+    //       // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+    //       if (dismiss === 'cancel') {
+    //         Swal.fire('Cancelled', 'Your imaginary file is safe :)', 'error');
+    //       }
+    //     }
+    //   );
+    // }, 5000);
+  }
 
   get getUserFormArray() {
     return this.userFormObj.address;
@@ -158,5 +220,50 @@ export class TeamTaskComponent implements OnInit {
   //       Swal.fire({ text: err.error.errorMsg, confirmButtonText: 'Ok' });
   //     },
   //   });
+  // }
+
+  /// ng-wizard
+
+  stepChanged(args: any): void {
+    this.currentStepIndex = args.step.index;
+  }
+
+  showNextStep() {
+    this.ngWizardService.next();
+  }
+
+  showPrevStep() {
+    this.ngWizardService.previous();
+  }
+
+  //// single select
+
+  /**
+   * @description method to update singleselect control value
+   * @author Jagdish
+   * @param {event:any,field:FormControl}
+   * @returns void
+   */
+  updateSingleSelectControl(event: any, field: any): void {
+    field.gender = event.id;
+    // field = event.id;
+    // field.patchValue(event.id);
+  }
+  /**
+   * @description method to get selected country or state data if from is country than call state api
+   * @author Jagdish
+   * @param {event:any,field:FormControl,from:string}
+   * @returns void
+   */
+  // updateSingleSelect(event: any, field: any, from?: string) {
+  //   field.patchValue({ id: event.id, name: event.name });
+  //   if (from == 'country') {
+  //     this.siteForm.controls.state.patchValue('');
+  //     this.siteForm.controls.zip.patchValue('');
+  //     this.siteForm.controls.city.patchValue('');
+  //     this.siteForm.controls.lat.patchValue('');
+  //     this.siteForm.controls.lng.patchValue('');
+  //     this.getStateList(event.id);
+  //   }
   // }
 }

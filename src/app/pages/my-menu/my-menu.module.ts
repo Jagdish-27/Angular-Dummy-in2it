@@ -20,7 +20,11 @@ import { CommentComponent } from './components/comment/comment.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { HighlighSearchPipe } from 'src/app/pipes/highligh-search.pipe';
+import { NgWizardConfig, NgWizardModule, THEME } from 'ng-wizard';
 
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.dots,
+};
 @NgModule({
   declarations: [
     TeamTaskComponent,
@@ -43,6 +47,7 @@ import { HighlighSearchPipe } from 'src/app/pipes/highligh-search.pipe';
     FormsModule,
     AgGridModule,
     SharedModule,
+    NgWizardModule.forRoot(ngWizardConfig),
   ],
 })
 export class MyMenuModule {}
