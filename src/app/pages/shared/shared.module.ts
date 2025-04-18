@@ -20,6 +20,8 @@ import { SingleSelectDropdownComponent } from './single-select-dropdown/single-s
 import { MultiSelectDropdownComponent } from './multi-select-dropdown/multi-select-dropdown.component';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AppCustomDirective } from './directives/app-custom.directive';
+import { PasswordValidatorDirective } from './directives/password-validator.directive';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     StatusRendererComponent,
     SingleSelectDropdownComponent,
     MultiSelectDropdownComponent,
+    AppCustomDirective,
+    PasswordValidatorDirective,
   ],
   imports: [
     CommonModule,
@@ -51,6 +55,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AngularCalenderComponent,
     SingleSelectDropdownComponent,
     MultiSelectDropdownComponent,
+    AppCustomDirective,
+    PasswordValidatorDirective,
   ],
 })
 export class SharedModule {}

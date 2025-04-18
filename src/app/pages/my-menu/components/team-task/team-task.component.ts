@@ -107,6 +107,7 @@ export class TeamTaskComponent implements OnInit {
     gender: '',
     sports: [],
     email: '',
+    password: '',
     address: [{ city: '', country: '' }],
   };
 
@@ -296,4 +297,6 @@ export class TeamTaskComponent implements OnInit {
     //   this.getAllFilteredSites();
     // }
   }
+
+  password: string = '';
 }

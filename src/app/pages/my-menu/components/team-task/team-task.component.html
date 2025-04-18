@@ -101,6 +101,41 @@
       </div> 
     -->
   </div>
+  <div class="form-group">
+    <label for="pasword">Password:</label>
+    <!-- <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="userFormObj.password"
+      #passwordInput="ngModel"
+      required
+      appPasswordValidator="[A-Za-z]+[0-9]+"
+    />
+    <div
+      *ngIf="
+        passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)
+      "
+    >
+      <span style="color: red" *ngIf="passwordInput.hasError('required')"
+        >This field is required</span
+      >
+      <span style="color: red" *ngIf="passwordInput.hasError('passwordPattern')"
+        >Password must includes numbers and alphabets</span
+      >
+    </div> -->
+    <!-- <app-error [control]="passwordInput"></app-error> -->
+    <!-- <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)"
+           class="text-danger">
+        <div *ngIf="emailInput.errors?.['required']">
+          Email is required.
+        </div>
+        <div *ngIf="emailInput.errors?.['email']">
+          Please enter a valid email address.
+        </div>
+      </div> 
+    -->
+  </div>
   <ng-container *ngFor="let control of getUserFormArray; let i = index">
     <div [ngModelGroup]="'Address' + i" class="form-group">
       <label for="city">City:</label>
@@ -177,3 +212,28 @@
     <i-feather name="chevrons-right" class="feather_icon_10 ms-1"></i-feather>
   </button>
 </div>
+
+<label for="password">Password</label>
+<input
+  type="password"
+  id="password"
+  name="password"
+  [(ngModel)]="password"
+  #passwordInput="ngModel"
+  required
+  appPasswordValidator="[A-Za-z]+[0-9]+"
+/>
+<div
+  *ngIf="
+    passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)
+  "
+>
+  <span style="color: red" *ngIf="passwordInput.hasError('required')"
+    >This field is required</span
+  >
+  <span style="color: red" *ngIf="passwordInput.hasError('passwordPattern')"
+    >Password must includes numbers and alphabets</span
+  >
+</div>
+
+<div appAppCustom="red">Hower Me Dude !</div>
