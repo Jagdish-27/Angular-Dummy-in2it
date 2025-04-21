@@ -22,6 +22,8 @@ import { MultiSelectDropdownComponent } from './multi-select-dropdown/multi-sele
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AppCustomDirective } from './directives/app-custom.directive';
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
+import { AutofocusDirective } from './directives/autofocus.directive';
+import { LazyLoadDirective } from './directives/lazy-load.directive';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { PasswordValidatorDirective } from './directives/password-validator.dire
     MultiSelectDropdownComponent,
     AppCustomDirective,
     PasswordValidatorDirective,
+    AutofocusDirective,
+    LazyLoadDirective,
   ],
   imports: [
     CommonModule,
@@ -57,6 +61,8 @@ import { PasswordValidatorDirective } from './directives/password-validator.dire
     MultiSelectDropdownComponent,
     AppCustomDirective,
     PasswordValidatorDirective,
+    AutofocusDirective,
+    LazyLoadDirective,
   ],
 })
 export class SharedModule {}
