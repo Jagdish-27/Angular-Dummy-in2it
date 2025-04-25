@@ -13,6 +13,7 @@ import { allIcons } from 'angular-feather/icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+import { SharedModule } from './pages/shared/shared.module';
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.default,
 };
@@ -37,6 +38,7 @@ const ngWizardConfig: NgWizardConfig = {
     FeatherModule.pick(allIcons),
     NgWizardModule.forRoot(ngWizardConfig),
     NgxSpinnerModule,
+    SharedModule,
     // AgGridModule,
   ],
   providers: [],

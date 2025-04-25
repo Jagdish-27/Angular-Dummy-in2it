@@ -24,6 +24,16 @@ import { AppCustomDirective } from './directives/app-custom.directive';
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { LazyLoadDirective } from './directives/lazy-load.directive';
+import { DraggableDirective } from './directives/draggable.directive';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
+import { ReadKeyPipe } from './pipes/read-key.pipe';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { HighlightSearchDirective } from './directives/highlight-search.directive';
+import { TooltipDirective } from './directives/tooltip.directive';
+import { DisableRightClickDirective } from './directives/disable-right-click.directive';
+import { TimeAgoDirective } from './directives/time-ago.directive';
+import { CopyToClipboardDirective } from './directives/copy-to-clipboard.directive';
 
 @NgModule({
   declarations: [
@@ -40,6 +50,16 @@ import { LazyLoadDirective } from './directives/lazy-load.directive';
     PasswordValidatorDirective,
     AutofocusDirective,
     LazyLoadDirective,
+    DraggableDirective,
+    ClickOutsideDirective,
+    InfiniteScrollDirective,
+    ReadKeyPipe,
+    BreadcrumbComponent,
+    HighlightSearchDirective,
+    TooltipDirective,
+    DisableRightClickDirective,
+    TimeAgoDirective,
+    CopyToClipboardDirective,
   ],
   imports: [
     CommonModule,
@@ -63,6 +83,16 @@ import { LazyLoadDirective } from './directives/lazy-load.directive';
     PasswordValidatorDirective,
     AutofocusDirective,
     LazyLoadDirective,
+    DraggableDirective,
+    ClickOutsideDirective,
+    InfiniteScrollDirective,
+    ReadKeyPipe,
+    BreadcrumbComponent,
+    HighlightSearchDirective,
+    TooltipDirective,
+    DisableRightClickDirective,
+    TimeAgoDirective,
+    CopyToClipboardDirective,
   ],
 })
 export class SharedModule {}

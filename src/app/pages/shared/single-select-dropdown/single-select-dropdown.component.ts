@@ -131,4 +131,5 @@ export class SingleSelectDropdownComponent implements OnInit {
   clickOnAdditionalTemplate() {
     this.sendAdditionalTemplate.emit();
   }
+  color = '#fff';
 }

@@ -4,12 +4,13 @@ import { CustomTaskComponent } from './components/custom-task/custom-task.compon
 import { OrganizationSettingsComponent } from './components/organization-settings/organization-settings.component';
 
 const routes: Routes = [
-  {path:'custom-task', component:CustomTaskComponent},
-  {path:'organization-settings',component:OrganizationSettingsComponent},
+  { path: '', redirectTo: 'custom-task', pathMatch: 'full' },
+  { path: 'custom-task', component: CustomTaskComponent },
+  { path: 'organization-settings', component: OrganizationSettingsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SettingsRoutingModule { }
+export class SettingsRoutingModule {}

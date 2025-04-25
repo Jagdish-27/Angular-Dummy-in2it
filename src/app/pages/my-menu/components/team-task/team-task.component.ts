@@ -145,6 +145,8 @@ export class TeamTaskComponent implements OnInit {
     //     }
     //   );
     // }, 5000);
+
+    console.log(this.check('manualLinksFoUser'));
   }
 
   get getUserFormArray() {
@@ -299,4 +301,53 @@ export class TeamTaskComponent implements OnInit {
   }
 
   password: string = '';
+
+  dropdownOpen: boolean = false;
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  closeDropdown(_event: MouseEvent) {
+    this.dropdownOpen = false;
+  }
+
+  items = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`);
+
+  loadMore() {
+    console.log('next api hitted');
+    const nextItems = Array.from(
+      { length: 10 },
+      (_, i) => `Item ${this.items.length + i + 1}`
+    );
+    this.items = [...this.items, ...nextItems];
+  }
+
+  obj = {
+    name: 'jagdish',
+    id: 1,
+    address: {
+      city: 'Delhi',
+      zipCode: 230,
+      contact: {
+        phone: '114309867',
+      },
+    },
+  };
+
+  searchQuery!: string;
+
+  check(str: string) {
+    let result = str[0].toUpperCase();
+    let newStr = str.split('');
+
+    for (let i = 1; i < newStr.length; i++) {
+      if (newStr[i] != newStr[i].toUpperCase()) {
+        result += newStr[i];
+      } else {
+        result += ' ' + newStr[i].toUpperCase();
+      }
+    }
+    return result;
+  }
+  postDate = new Date(2024, 11, 31);
 }

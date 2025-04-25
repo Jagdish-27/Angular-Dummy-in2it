@@ -11,20 +11,21 @@ import { ContactComponent } from './components/contact/contact.component';
 import { OrganizationDetailComponent } from './components/organization-detail/organization-detail.component';
 
 const routes: Routes = [
-  {path:'organization', component:OrganizationComponent},
-  {path:'contact', component:ContactComponent},
-  {path:'human-task',component:HumanTaskComponent},
-  {path:'process',component:ProcessComponent},
-  {path:'schedule-list',component:ScheduleListComponent},
-  {path:'solution-areas',component:SolutionAreasComponent},
-  {path:'workflows',component:WorkflowsComponent},
-  {path:'workflows-execution', component:WorkflowsExecutionComponent},
+  { path: '', redirectTo: 'organization', pathMatch: 'full' },
+  { path: 'organization', component: OrganizationComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'human-task', component: HumanTaskComponent },
+  { path: 'process', component: ProcessComponent },
+  { path: 'schedule-list', component: ScheduleListComponent },
+  { path: 'solution-areas', component: SolutionAreasComponent },
+  { path: 'workflows', component: WorkflowsComponent },
+  { path: 'workflows-execution', component: WorkflowsExecutionComponent },
   // { path: 'organization/:id', component: OrganizationDetailComponent }
-  { path: 'organization/detail', component: OrganizationDetailComponent }
+  { path: 'organization/detail', component: OrganizationDetailComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MyOrganizationRoutingModule { }
+export class MyOrganizationRoutingModule {}

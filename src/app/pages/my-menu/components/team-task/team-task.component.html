@@ -11,6 +11,7 @@
       minlength="3"
       maxlength="20"
     />
+    <!-- This is common error component to display error message -->
     <app-error [control]="nameInput"></app-error>
     <!-- <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)"
            class="text-danger">
@@ -32,7 +33,7 @@
           [optionsList]="siteGroupDropdown"
           [selectedItem]="siteForm.controls.siteGroup.value"
           (selectItem)="updateSingleSelectControl($event, siteForm.controls.siteGroup)"></app-singleselect-dropdown> -->
-
+    <!-- Single select use -->
     <app-single-select-dropdown
       placeholderName="Select Gender"
       [optionsList]="genderList"
@@ -66,7 +67,7 @@
               "
             >
             </app-multiselect-dropdown> -->
-
+    <!-- Multi Select Use Case -->
     <app-multi-select-dropdown
       [placeholder]="'Select Favourite Sports'"
       [dropdownList]="sportsList"
@@ -166,10 +167,12 @@
   <button type="submit">Submit</button>
   <!-- [disabled]="!myForm.valid" -->
 </form>
-<app-tree [node]="treeStructure_data"></app-tree>
+<!-- Recursive component routes and children routes  -->
+<!-- <app-tree [node]="treeStructure_data"></app-tree>
 <app-comment [comment]="comment_data"></app-comment>
 <app-menu [menuItems]="menuItems_data"></app-menu>
-<app-search></app-search> {{ value }}
+<app-search></app-search>  -->
+<!-- {{ value }}
 <select [(ngModel)]="value" (change)="onSelectChange($event)">
   <option value="">Action</option>
   <option value="Add">Add</option>
@@ -183,9 +186,17 @@
   (change)="onSelectFile($event)"
   type="file"
 />
-<a download="" style="cursor: pointer">Download Sample file</a>
+<a download="" style="cursor: pointer">Download Sample file</a> -->
+<!--  Drag Able directive -->
+<!-- <div
+  appDraggable
+  style="width: 250px; height: 100px; background: crimson; color: #fff"
+>
+  Drag me around!
+</div> -->
 
-<ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+<!-- Angular ng Wizard -->
+<!-- <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
   <ng-wizard-step [title]="'Step 1'" [description]="'Basic Info'">
     <span>Step 1 content</span>
   </ng-wizard-step>
@@ -201,8 +212,8 @@
   <ng-wizard-step [title]="'Step 4'" [description]="'Review and Finish'">
     <span>Step 4 content</span>
   </ng-wizard-step>
-</ng-wizard>
-<div>
+</ng-wizard> -->
+<!-- <div>
   <button class="btn btn-primary mx-3" (click)="showPrevStep()">
     <i-feather name="chevrons-left" class="feather_icon_10 ms-1"></i-feather>
     Back
@@ -211,9 +222,11 @@
     Next
     <i-feather name="chevrons-right" class="feather_icon_10 ms-1"></i-feather>
   </button>
-</div>
+</div> -->
 
-<label for="password">Password</label>
+<!-- Created Custom Validator for password -->
+
+<!-- <label for="password">Password</label>
 <input
   type="password"
   id="password"
@@ -234,7 +247,62 @@
   <span style="color: red" *ngIf="passwordInput.hasError('passwordPattern')"
     >Password must includes numbers and alphabets</span
   >
-</div>
+</div> -->
 
-<div appAppCustom="red">Hower Me Dude !</div>
-<img appLazyLoad data-src="assets\cross-img.svg" alt="Lazy load Image" />
+<!-- <div appAppCustom="red">Hower Me Dude !</div> -->
+
+<!-- App Lazy load image directive -->
+
+<!-- <img appLazyLoad data-src="assets\cross-img.svg" alt="Lazy load Image" /> -->
+
+<!--  Outside Click Directive -->
+
+<!-- <div
+  style="width: 200px"
+  appClickOutside
+  (outSideClicked)="closeDropdown($event)"
+>
+  <button (click)="toggleDropdown()">Toggle Dropdown</button>
+  <div
+    style="width: 200px; height: 100px; background-color: cyan"
+    *ngIf="dropdownOpen"
+    class="dropdown"
+  >
+    Dropdown content {{ obj | readKey : "address.contact.phone" }}
+  </div>
+</div> -->
+
+<!-- <div
+  appInfiniteScroll
+  [scrollThreshold]="50"
+  (scrolled)="loadMore()"
+  style="height: 300px; overflow-y: auto; border: 1px solid #ccc"
+>
+  <div *ngFor="let item of items">
+    {{ item }}
+  </div>
+</div> -->
+
+<!-- Hight search directive  -->
+<!-- <input type="text" [(ngModel)]="searchQuery" />
+<p  appHighlightSearch [searchQuery]="searchQuery">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quisquam iste,
+  qui ex ea voluptate velit
+</p> -->
+<!-- ToolTip Directive  -->
+<!-- <button [appTooltip]="'Click me to learn more'">Learn More</button> -->
+
+<!-- Disable right click directive -->
+
+<!-- <p
+  appDisableRightClick
+  style="width: 100; height: 100; background-color: cyan; color: black"
+>
+  I am right click disable you can not click me
+</p> -->
+<!--  Time age directive to show -->
+
+<!-- <p [appTimeAgo]="postDate"></p> -->
+
+<!-- copy to clipboard directive -->
+<!-- <button [appCopyToClipboard]="'Text to copy Check'">Copy to Clipboard</button> -->

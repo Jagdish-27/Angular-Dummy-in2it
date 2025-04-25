@@ -5,13 +5,14 @@ import { WorkflowBuilderComponent } from './components/workflow-builder/workflow
 import { ChartsComponent } from './components/charts/charts.component';
 
 const routes: Routes = [
-  {path:'form-builder',component:FormBuilderComponent},
-  {path:'workflow-builder',component:WorkflowBuilderComponent},
-  {path:'charts',component:ChartsComponent},
+  { path: '', redirectTo: 'form-builder', pathMatch: 'full' },
+  { path: 'form-builder', component: FormBuilderComponent },
+  { path: 'workflow-builder', component: WorkflowBuilderComponent },
+  { path: 'charts', component: ChartsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DesignerRoutingModule { }
+export class DesignerRoutingModule {}
