@@ -4,12 +4,13 @@ import { ProductsComponent } from './components/products/products.component';
 import { LocalListComponent } from './components/local-list/local-list.component';
 
 const routes: Routes = [
-  {path:'products',component:ProductsComponent},
-  {path:'products/local-list',component:LocalListComponent}
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: 'products', component: ProductsComponent },
+  { path: 'products/local-list', component: LocalListComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TablesRoutingModule { }
+export class TablesRoutingModule {}
