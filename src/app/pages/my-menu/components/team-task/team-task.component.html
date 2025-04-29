@@ -306,3 +306,59 @@
 
 <!-- copy to clipboard directive -->
 <!-- <button [appCopyToClipboard]="'Text to copy Check'">Copy to Clipboard</button> -->
+
+<!-- Upper case first letter pipe -->
+
+<!-- <p>{{ "hello world" | uppercaseFirst }}</p> -->
+
+<!--  Trunck text pipe -->
+
+<!-- <p
+  style="width: 250px"
+  [appTooltip]="'This is a long text that should be truncated'"
+>
+  {{ "This is a long text that should be truncated" | truncateText : 20 }}
+</p> -->
+
+<!-- Title Case pipe -->
+
+<!-- <p>{{ "this is a title case example" | titleCase }}</p> -->
+
+<!-- showing full name with shorts JD -->
+
+<!-- <p>{{ "John Doe" | initials }}</p> -->
+
+<!-- Phone number formater -->
+
+<!-- <p>{{ "1234567890" | phoneNumberFormatter }}</p> -->
+
+<!-- Converts a file size in bytes to a more human-readable format, such as KB, MB, or GB. -->
+
+<!-- <p>{{ 1024 | fileSize }}</p> -->
+
+<!-- <input
+  [ngModel]="'1234567890'"
+  [ngModelOptions]="{ updateOn: 'blur' }"
+  [value]="'(***) ***-****' | maskedInput : ''"
+/> -->
+<!-- As you type in the input field, it will be formatted like (123) 456-7890 -->
+
+<!-- app.component.html -->
+<!-- <div>
+  <input type="text" [(ngModel)]="phoneNumber">
+  <p>Original Input: {{ phoneNumber }}</p>
+  <p>Masked Input: {{ phoneNumber | maskedInput : mask }}</p>
+</div> -->
+
+<!-- Upper case first letter pipe -->
+
+<!-- <p>{{ "hello world" | uppercaseFirst }}</p> -->
+
+<!--  Trunck text pipe -->
+
+<!-- <p
+  style="width: 250px"
+  [appTooltip]="'This is a long text that should be truncated'"
+>
+  {{ "This is a long text that should be truncated" | truncateText : 20 }}
+</p> -->

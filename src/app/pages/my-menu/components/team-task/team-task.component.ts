@@ -350,4 +350,7 @@ export class TeamTaskComponent implements OnInit {
     return result;
   }
   postDate = new Date(2024, 11, 31);
+
+  phoneNumber = '1234567890';
+  mask = '(***) ***-****';
 }

@@ -34,6 +34,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
 import { DisableRightClickDirective } from './directives/disable-right-click.directive';
 import { TimeAgoDirective } from './directives/time-ago.directive';
 import { CopyToClipboardDirective } from './directives/copy-to-clipboard.directive';
+import { MaskedInputPipe } from './pipes/masked-input.pipe';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CopyToClipboardDirective } from './directives/copy-to-clipboard.directi
     DisableRightClickDirective,
     TimeAgoDirective,
     CopyToClipboardDirective,
+    MaskedInputPipe,
   ],
   imports: [
     CommonModule,
@@ -93,6 +95,7 @@ import { CopyToClipboardDirective } from './directives/copy-to-clipboard.directi
     DisableRightClickDirective,
     TimeAgoDirective,
     CopyToClipboardDirective,
+    MaskedInputPipe,
   ],
 })
 export class SharedModule {}
