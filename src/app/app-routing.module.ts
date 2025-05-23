@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadingStrategy, RouterModule, Routes } from '@angular/router';
+import { CustomPreloadingStrategies } from './config/custom-preloading-strategies';
 
 const routes: Routes = [
   { path: '', redirectTo: 'my-menu/my-task', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: () =>
       import('./pages/settings/settings.module').then((m) => m.SettingsModule),
+    data: { preload: false, title: 'Settings', delay: false },
   },
   {
     path: 'tables',
@@ -33,7 +35,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: false,
+      preloadingStrategy: CustomPreloadingStrategies,
+    }),
+  ],
   exports: [RouterModule],
+  declarations: [],
+  providers: [
+    { provide: PreloadingStrategy, useClass: CustomPreloadingStrategies },
+  ],
 })
 export class AppRoutingModule {}
