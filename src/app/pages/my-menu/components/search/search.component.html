@@ -1,4 +1,4 @@
-<p>search works!</p>
+<p>search works! {{ data }}</p>
 <input type="text" (keyup)="onKeyEnter($event.target)" />
 <div class="mb-1" *ngIf="usersSuggestions.length > 0">
   <h6 class="search_title mb-1">Users</h6>

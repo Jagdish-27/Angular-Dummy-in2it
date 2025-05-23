@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Attribute, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -7,11 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Attribute('data') public data: string
+  ) {}
 
   userList: any = [];
   ngOnInit(): void {
     this.getUserList();
+
+    this.data;
   }
 
   getUserList() {

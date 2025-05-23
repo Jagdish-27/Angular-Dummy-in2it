@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { STEP_STATE, NgWizardConfig, THEME, NgWizardService } from 'ng-wizard';
+import { AsyncSubject, from, of } from 'rxjs';
 // import { NgxSpinnerService } from 'ngx-spinner';
 // import Swal from 'sweetalert2';
 @Component({
@@ -116,8 +117,38 @@ export class TeamTaskComponent implements OnInit {
     textField: 'name',
     itemsShowLimit: 3,
   };
+  source = from([1, 2, 3, 4, 5]);
+  dummyList: any = [
+    { id: '1', name: 'Rohit' },
+    { id: '2', name: 'Mohit' },
+  ];
 
+  idObse = of('1', '2');
+  getUserById(id: string) {
+    let user = this.dummyList.find((item: any) => item.id == id);
+    return of(user);
+  }
+
+  // getUser(user: any) {
+  //   return of({ id: user.id, position: 'developer' });
+  // }
+  // userObserver = this.idObse.pipe(
+  //   mergeMap((userID) => this.getUserById(userID))
+  // );
+  // ob = concat(of(1).pipe(delay(400)), of(2));
   ngOnInit(): void {
+    // this.ob.subscribe((res: any) => {
+    //   console.log('res', res);
+    // });
+    // this.userObserver.subscribe({
+    //   next: (res: any) => {
+    //     console.log('response from api', res);
+    //   },
+    //   error: (error) => {
+    //     console.log('error', error);
+    //   },
+    // });
+    this.just();
     // this.spinner.show();
     // setTimeout(() => {
     //   /** spinner ends after 5 seconds */
@@ -353,4 +384,125 @@ export class TeamTaskComponent implements OnInit {
 
   phoneNumber = '1234567890';
   mask = '(***) ***-****';
+
+  dragBoxLeft = 50;
+  dragBoxTop = 50;
+  dragBoxWidth = 100;
+  dragBoxHeight = 75;
+
+  miniMapWidth = 200;
+  miniMapHeight = 150;
+
+  largeViewWidth = 800;
+  largeViewHeight = 600;
+
+  private startX = 0;
+  private startY = 0;
+  private dragging = false;
+
+  // Clean up listeners if needed
+  ngOnDestroy(): void {
+    this.removeListeners();
+  }
+
+  startDrag(event: PointerEvent): void {
+    event.preventDefault();
+    this.dragging = true;
+    this.startX = event.clientX;
+    this.startY = event.clientY;
+
+    document.addEventListener('pointermove', this.onPointerMove);
+    document.addEventListener('pointerup', this.onPointerUp);
+  }
+
+  private onPointerMove = (event: PointerEvent): void => {
+    if (!this.dragging) return;
+
+    const dx = event.clientX - this.startX;
+    const dy = event.clientY - this.startY;
+
+    this.dragBoxLeft = Math.max(
+      0,
+      Math.min(this.miniMapWidth - this.dragBoxWidth, this.dragBoxLeft + dx)
+    );
+    this.dragBoxTop = Math.max(
+      0,
+      Math.min(this.miniMapHeight - this.dragBoxHeight, this.dragBoxTop + dy)
+    );
+
+    // Move the large view to match the drag box position
+    const scaleX = this.largeViewWidth / this.miniMapWidth;
+    const scaleY = this.largeViewHeight / this.miniMapHeight;
+
+    const largeView = document.querySelector('.large-view') as HTMLElement;
+    if (largeView) {
+      largeView.style.left = `-${this.dragBoxLeft * scaleX}px`;
+      largeView.style.top = `-${this.dragBoxTop * scaleY}px`;
+    }
+
+    this.startX = event.clientX;
+    this.startY = event.clientY;
+  };
+
+  private onPointerUp = (): void => {
+    this.dragging = false;
+    this.removeListeners();
+  };
+
+  private removeListeners(): void {
+    document.removeEventListener('pointermove', this.onPointerMove);
+    document.removeEventListener('pointerup', this.onPointerUp);
+  }
+
+  rsubject = new AsyncSubject();
+
+  just() {
+    // this.rsubject.next(100);
+    // this.rsubject.next(200);
+    // this.rsubject.next(300);
+    this.rsubject.next(400);
+    this.rsubject.complete();
+
+    this.rsubject.subscribe({
+      next: (val) => {
+        console.log('a', val);
+      },
+    });
+
+    // this.bsubject.subscribe({
+    //   next: (val) => {
+    //     console.log('b', val);
+    //   },
+    // });
+  }
+
+  dataFromParent = 'data from parent';
+
+  // prevent button to click multiple times custom logic
+  // isFirst = true;
+  // onBtnClick() {
+  //   if (!this.isFirst) {
+  //     return;
+  //   } else {
+  //     console.log('button click');
+  //     this.isFirst = false;
+
+  //     let booleanOb = of(true);
+
+  //     booleanOb.pipe(throttleTime(300)).subscribe((res) => {
+  //       this.isFirst = res;
+  //     });
+
+  //   }
+  // }
+
+  // @ViewChild('btn') onBtnClick!: ElementRef;
+  // ngAfterViewInit() {
+  //   // const onBtnClick = document.getElementById('btn') as HTMLElement;
+  //   fromEvent(this.onBtnClick.nativeElement, 'click')
+  //     .pipe(throttleTime(3000))
+  //     .subscribe(() => {
+  //       console.log('button click');
+  //     });
+  // }
 }

@@ -12,3 +12,43 @@
     pointer-events: none;
     transition: opacity 0.2s ease-in-out;
 }
+
+/* mini-map.component.scss */
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+
+.large-view-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    overflow: hidden;
+    /* Clip the view to the area inside the drag-box */
+}
+
+.large-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.mini-map {
+    position: relative;
+    width: 200px;
+    height: 150px;
+}
+
+.overview {
+    border: 1px solid #ccc;
+}
+
+.drag-box {
+    position: absolute;
+    border: 2px solid red;
+    cursor: pointer;
+    opacity: 0.5;
+}

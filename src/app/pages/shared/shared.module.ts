@@ -35,6 +35,7 @@ import { DisableRightClickDirective } from './directives/disable-right-click.dir
 import { TimeAgoDirective } from './directives/time-ago.directive';
 import { CopyToClipboardDirective } from './directives/copy-to-clipboard.directive';
 import { MaskedInputPipe } from './pipes/masked-input.pipe';
+import { SkipTestPipe } from './pipes/skip-test.pipe';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { MaskedInputPipe } from './pipes/masked-input.pipe';
     TimeAgoDirective,
     CopyToClipboardDirective,
     MaskedInputPipe,
+    SkipTestPipe,
   ],
   imports: [
     CommonModule,
