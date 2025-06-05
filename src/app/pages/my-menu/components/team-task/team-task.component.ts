@@ -37,7 +37,7 @@ export class TeamTaskComponent implements OnInit {
 
   name: string = 'rohit';
 
-  // Data Created for tree like structure maybe useful in the future perspective
+  //#region Data Created for tree like structure maybe useful in the future perspective
   // Building a Recursive Tree Component
   treeStructure_data = {
     name: 'Root',
@@ -460,18 +460,68 @@ export class TeamTaskComponent implements OnInit {
     // this.rsubject.next(100);
     // this.rsubject.next(200);
     // this.rsubject.next(300);
-    this.rsubject.next(400);
-    this.rsubject.complete();
-
-    this.rsubject.subscribe({
-      next: (val) => {
-        console.log('a', val);
-      },
-    });
-
+    // this.rsubject.next(400);
+    // this.rsubject.complete();
+    // this.rsubject.subscribe({
+    //   next: (val) => {
+    //     console.log('a', val);
+    //   },
+    // });
     // this.bsubject.subscribe({
     //   next: (val) => {
     //     console.log('b', val);
+    //   },
+    // });
+    // # Frok join
+    // let req1 = this.http.get('https://jsonplaceholder.typicode.com/todos');
+    // let req2 = this.http.get('https://jsonplaceholder.typicode.com/users');
+    // forkJoin({ blog: req1, users: req2 }).subscribe({
+    //   next: (result) => {
+    //     console.log('res', result.blog);
+    //     console.log('res', result.users);
+    //   },
+    //   error: (err) => {
+    //     console.log('err', err);
+    //   },
+    // });
+    // let search = document.getElementById('search-input') as HTMLElement;
+    // fromEvent(search, 'keyup')
+    //   .pipe(
+    //     debounceTime(400),
+    //     distinctUntilChanged(),
+    //     switchMap((evet: any) => {
+    //       return this.http.get(
+    //         `https://api.example.com/search?q=${evet.target.value}`
+    //       );
+    //     })
+    //   )
+    //   .subscribe({
+    //     next: (res) => {
+    //       console.log('search res', res);
+    //     },
+    //     error: (error) => {
+    //       console.log('error', error);
+    //     },
+    //   });
+    // ********** combine latest
+    // let req1 = this.http.get('https://jsonplaceholder.typicode.com/todos');
+    // let req2 = this.http.get('https://jsonplaceholder.typicode.com/users');
+    // combineLatest([req1, req2]).subscribe({
+    //   next: ([res1, res2]) => {
+    //     console.log('res', res1);
+    //     console.log('res2', res2);
+    //   },
+    //   error: (err) => {
+    //     console.log('err', err);
+    //   },
+    // });
+    // forkJoin({ blog: req1, users: req2 }).subscribe({
+    //   next: (result) => {
+    //     console.log('res', result.blog);
+    //     console.log('res', result.users);
+    //   },
+    //   error: (err) => {
+    //     console.log('err', err);
     //   },
     // });
   }
