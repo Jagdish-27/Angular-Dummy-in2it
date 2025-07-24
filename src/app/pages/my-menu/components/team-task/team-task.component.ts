@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { STEP_STATE, NgWizardConfig, THEME, NgWizardService } from 'ng-wizard';
 import { AsyncSubject, from, of } from 'rxjs';
@@ -9,7 +9,7 @@ import { AsyncSubject, from, of } from 'rxjs';
   templateUrl: './team-task.component.html',
   styleUrls: ['./team-task.component.css'],
 })
-export class TeamTaskComponent implements OnInit {
+export class TeamTaskComponent implements OnInit, AfterViewInit {
   //#region mirror highlight
   stepStates = {
     normal: STEP_STATE.normal,
@@ -178,6 +178,11 @@ export class TeamTaskComponent implements OnInit {
     // }, 5000);
 
     console.log(this.check('manualLinksFoUser'));
+  }
+
+  async ngAfterViewInit() {
+    this.setupDraggable();
+    this.setupResizable();
   }
 
   get getUserFormArray() {
@@ -456,7 +461,18 @@ export class TeamTaskComponent implements OnInit {
 
   rsubject = new AsyncSubject();
 
+  numberOb = from([1, 2, 3, 4, 5]);
+
   just() {
+    //#region MERGE MAP
+    // this.numberOb
+    //   .pipe(mergeMap((res) => delay(res * 1000)))
+    //   .subscribe({
+    //     next: (res) => {
+    //       console.log('res', res);
+    //     },
+    //   });
+    //#region SUBJECT
     // this.rsubject.next(100);
     // this.rsubject.next(200);
     // this.rsubject.next(300);
@@ -524,6 +540,18 @@ export class TeamTaskComponent implements OnInit {
     //     console.log('err', err);
     //   },
     // });
+    // for (let index = 0; index < this.stations.length; index++) {
+    //   const element = this.stations[index];
+    //   setTimeout(() => {
+    //     element.visited = true;
+    //     if (this.stations[index + 1]) {
+    //       this.stations[index + 1].next = true;
+    //       this.stations[index + 1].isActive = true;
+    //       delete element.next;
+    //       delete element.isActive;
+    //     }
+    //   }, index * 5000);
+    // }
   }
 
   dataFromParent = 'data from parent';
@@ -555,4 +583,96 @@ export class TeamTaskComponent implements OnInit {
   //       console.log('button click');
   //     });
   // }
+
+  stations: {
+    name: string;
+    visited?: boolean;
+    next?: boolean;
+    nextStation: string;
+    isActive?: boolean;
+  }[] = [
+    { name: 'New Delhi', nextStation: 'Rajiv Chowk' },
+    { name: 'Rajiv Chowk', nextStation: 'Azadpur' },
+    { name: 'Azadpur', nextStation: 'Kashmiri Gate' },
+    { name: 'Kashmiri Gate', nextStation: '' },
+  ];
+
+  //#region Drag and Drop Feature on Box
+
+  dragEl: any;
+  dragHandleEl: any;
+  lastPosition: any = {};
+  boundDragStart: any;
+  boundDragEnd: any;
+  boundDragMove: any;
+
+  /**
+   * @description this method use to setup Dragable and resizable events for device info popup
+   * @author Jagdish
+   * @params {}
+   * @retunrs :{}
+   */
+
+  setupDraggable() {
+    this.dragHandleEl = document.querySelector(
+      '[data-drag-handle]'
+    ) as HTMLElement;
+
+    this.boundDragStart = this.dragStart.bind(this);
+    this.boundDragMove = this.dragMove.bind(this);
+    this.boundDragEnd = this.dragEnd.bind(this);
+
+    this.dragHandleEl.addEventListener('mousedown', this.boundDragStart);
+  }
+
+  dragStart(event: MouseEvent) {
+    this.dragEl = this.getDraggableAncestor(event.target as HTMLElement);
+    if (!this.dragEl) return;
+
+    this.dragEl.style.position = 'absolute';
+
+    this.lastPosition.left = event.clientX;
+    this.lastPosition.top = event.clientY;
+
+    document.addEventListener('mousemove', this.boundDragMove);
+    document.addEventListener('mouseup', this.boundDragEnd);
+  }
+
+  dragMove(event: MouseEvent) {
+    if (!this.dragEl) return;
+
+    const deltaX = event.clientX - this.lastPosition.left;
+    const deltaY = event.clientY - this.lastPosition.top;
+
+    const currentLeft = parseInt(this.dragEl.style.left || '0', 10);
+    const currentTop = parseInt(this.dragEl.style.top || '0', 10);
+
+    this.dragEl.style.left = `${currentLeft + deltaX}px`;
+    this.dragEl.style.top = `${currentTop + deltaY}px`;
+
+    this.lastPosition.left = event.clientX;
+    this.lastPosition.top = event.clientY;
+
+    window.getSelection()?.removeAllRanges();
+  }
+
+  dragEnd() {
+    document.removeEventListener('mousemove', this.boundDragMove);
+    document.removeEventListener('mouseup', this.boundDragEnd);
+    this.dragEl = null;
+  }
+
+  getDraggableAncestor(element: HTMLElement | any): HTMLElement | null {
+    if (!element) return null;
+    if (element.hasAttribute('data-draggable')) return element;
+    return this.getDraggableAncestor(element.parentElement);
+  }
+
+  setupResizable() {
+    const resizeEl = document.querySelector('[data-resizable]') as HTMLElement;
+    if (resizeEl) {
+      resizeEl.style.resize = 'both';
+      // resizeEl.style.overflow = "auto";
+    }
+  }
 }

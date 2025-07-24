@@ -288,11 +288,11 @@
 </div> -->
 
 <!-- Hight search directive  -->
-<!-- <input type="text" [(ngModel)]="searchQuery" />
-<p  appHighlightSearch [searchQuery]="searchQuery">
+<input type="text" [(ngModel)]="searchQuery" />
+<p appHighlightSearch [searchQuery]="searchQuery">
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quisquam iste,
   qui ex ea voluptate velit
-</p> -->
+</p>
 <!-- ToolTip Directive  -->
 <!-- <button [appTooltip]="'Click me to learn more'">Learn More</button> -->
 
@@ -368,12 +368,10 @@
 </p> -->
 
 <!-- This is to just revert the last commit test , reverted the last push and changed and again pushing -->
-<div class="container">
-  <!-- Large View (topology view) with clipping -->
+<!-- <div class="container">
   <div class="large-view-container">
     <div class="large-view">
       <svg width="800" height="600" viewBox="0 0 800 600" class="topology">
-        <!-- Your topology SVG content goes here -->
         <circle cx="100" cy="100" r="50" fill="blue" />
         <circle cx="300" cy="200" r="50" fill="green" />
         <rect x="500" y="300" width="100" height="100" fill="red" />
@@ -381,16 +379,13 @@
     </div>
   </div>
 
-  <!-- Mini Map (overview) -->
   <div class="mini-map">
     <svg width="200" height="150" viewBox="0 0 800 600" class="overview">
-      <!-- Your topology SVG content goes here (same as large view) -->
       <circle cx="100" cy="100" r="50" fill="blue" />
       <circle cx="300" cy="200" r="50" fill="green" />
       <rect x="500" y="300" width="100" height="100" fill="red" />
     </svg>
 
-    <!-- Draggable rectangle to pan -->
     <div
       class="drag-box"
       [style.left.px]="dragBoxLeft"
@@ -400,8 +395,46 @@
       (pointerdown)="startDrag($event)"
     ></div>
   </div>
-</div>
+</div> -->
 <app-search data="dataFromParent"></app-search>
 <button #btn id="btn">Click</button>
 
 <input type="text" placeholder="search" id="search-input" />
+
+<!-- <p>Stations List</p>
+
+<div
+  *ngFor="let stationItem of stations"
+  style="display: flex; gap: 10px; align-items: center"
+>
+  {{ stationItem.name }}
+  <span
+    [ngStyle]="{
+      background: stationItem.visited ? 'red' : stationItem.next ? 'green' : ''
+    }"
+    style="width: 300px; height: 300px; display: block; border-radius: 100%"
+    >next station is:{{
+      stationItem.next && stationItem.isActive ? stationItem.nextStation : ""
+    }}</span
+  >
+</div> -->
+
+<!-- *********** Drag and Drop Feature  -->
+
+<div
+  data-draggable="true"
+  data-resizable="true"
+  class="device-view"
+  id="sideDetails"
+  style="position: absolute; display: none"
+>
+  <div
+    class="modal-header d-flex justify-content-between align-items-center"
+    data-drag-handle="true"
+  >
+    <h4>Device Info</h4>
+    <p class="cursor-pointer mb-3">Here is the Info</p>
+    <!-- <i-feather name="external-link" class="me-2"></i-feather>
+      <i-feather name="x" (click)="hideSideDetails()"></i-feather> -->
+  </div>
+</div>
