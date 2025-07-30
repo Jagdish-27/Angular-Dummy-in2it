@@ -20,6 +20,7 @@ import { GeneralOverviewComponent } from './components/general-overview/general-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 import { SharedModule } from '../shared/shared.module';
+import { GroupNameDialogComponent } from './components/group-name-dialog/group-name-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SharedModule } from '../shared/shared.module';
     OrganizationDetailComponent,
     OrgContacsComponent,
     GeneralOverviewComponent,
+    GroupNameDialogComponent,
   ],
   imports: [
     CommonModule,

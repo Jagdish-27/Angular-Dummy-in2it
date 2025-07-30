@@ -1,0 +1,14 @@
+<div class="modal-overlay" (click)="close()"></div>
+<div class="modal-content">
+  <h2>Name Your Group</h2>
+  <input
+    type="text"
+    [(ngModel)]="groupName"
+    placeholder="Enter group name"
+    (keydown.enter)="submit()"
+  />
+  <div class="actions">
+    <button (click)="submit()">OK</button>
+    <button (click)="close()">Cancel</button>
+  </div>
+</div>

@@ -1,1 +1,110 @@
-<p>workflows-execution works!</p>
+<button (click)="openGroupDialog()">Group Selected</button>
+
+<svg
+  [attr.width]="mainWidth"
+  [attr.height]="mainHeight"
+  style="background-color: #fafafa; border: 1px solid #ccc"
+  (pointermove)="move($event)"
+  (pointerup)="up()"
+  (click)="clearSelection()"
+>
+  <!-- Group bounding box when expanded -->
+  <g *ngFor="let group of topologyDetails.topologyItems">
+    <g *ngIf="group.isGroup && group.isExpanded">
+      <rect
+        [attr.x]="getGroupBoundingBox(group).x"
+        [attr.y]="getGroupBoundingBox(group).y"
+        [attr.width]="getGroupBoundingBox(group).width"
+        [attr.height]="getGroupBoundingBox(group).height"
+        fill="none"
+        stroke="#1976d2"
+        stroke-dasharray="6,4"
+        rx="10"
+        ry="10"
+      />
+      <text
+        [attr.x]="getGroupBoundingBox(group).x + 10"
+        [attr.y]="getGroupBoundingBox(group).y - 10"
+        font-size="14"
+        fill="#1976d2"
+        (dblclick)="toggleGroup(group)"
+      >
+        {{ group.name }}
+      </text>
+    </g>
+  </g>
+
+  <g
+    *ngFor="let item of topologyDetails.topologyItems"
+    [attr.display]="item.visible === false ? 'none' : 'inline'"
+  >
+    <!-- Group Node (Collapsed) -->
+    <g *ngIf="item.isGroup && !item.isExpanded">
+      <rect
+        [attr.x]="item.x - 40"
+        [attr.y]="item.y - 25"
+        width="80"
+        height="50"
+        rx="10"
+        ry="10"
+        fill="#c4d8f0"
+        stroke="black"
+        (dblclick)="toggleGroup(item)"
+      ></rect>
+      <text
+        [attr.x]="item.x"
+        [attr.y]="item.y + 5"
+        text-anchor="middle"
+        font-size="14"
+        fill="black"
+      >
+        {{ item.name }}
+      </text>
+    </g>
+
+    <!-- Site Node -->
+    <g *ngIf="!item.isGroup">
+      <circle
+        [attr.cx]="item.x"
+        [attr.cy]="item.y"
+        r="20"
+        [attr.fill]="item.selected ? '#ffcc00' : '#90caf9'"
+        stroke="#333"
+        stroke-width="2"
+        (pointerdown)="pointerDown(item, $event)"
+      ></circle>
+
+      <text
+        [attr.x]="item.x"
+        [attr.y]="item.y + 5"
+        font-size="12"
+        text-anchor="middle"
+        fill="#000"
+      >
+        {{ item.name }}
+      </text>
+
+      <!-- Checkbox -->
+      <foreignObject
+        [attr.x]="item.x + 20"
+        [attr.y]="item.y - 10"
+        width="30"
+        height="30"
+      >
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <input
+            type="checkbox"
+            [checked]="item.selected"
+            (click)="toggleSelection(item, $event)"
+          />
+        </div>
+      </foreignObject>
+    </g>
+  </g>
+</svg>
+
+<app-group-name-dialog
+  *ngIf="showGroupDialog"
+  (submitted)="handleGroupName($event)"
+  (closed)="showGroupDialog = false"
+></app-group-name-dialog>
