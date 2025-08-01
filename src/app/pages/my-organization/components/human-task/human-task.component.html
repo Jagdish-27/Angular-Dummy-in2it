@@ -85,13 +85,20 @@
     <path
       *ngIf="item.z_end?.x && item.z_end?.y"
       [attr.d]="
-        constructPathForSite(item.x, item.y, item.z_end?.x, item.z_end?.y)
+        constructPathForSite(
+          item.x,
+          item.y,
+          item.z_end?.x,
+          item.z_end?.y,
+          'zigzag'
+        )
       "
-      style="fill: none; stroke: #056b05; stroke-width: 1"
+      style="fill: none; stroke: #056b05; stroke-width: 2"
     ></path>
   </g>
 </svg>
-
+<!-- this line for dotted dashed line in svg path -->
+<!-- stroke-dasharray: '8,8'; -->
 <div class="img-zoom-container">
   <!-- <img
       id="myimage"

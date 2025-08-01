@@ -54,10 +54,56 @@ export class HumanTaskComponent implements OnInit {
     return pathD;
   }
 
-  constructPathForSite(x1: number, y1: number, x2: number, y2: number) {
-    let pathD: string = `M${x1 + 10} ${y1 - 5} L${x2 + 10} ${y2 - 5}`;
-    return pathD;
+  constructPathForSite(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    type?: string
+  ): string {
+    if (type === 'zigzag') {
+      const segments = 12; // Number of zigzag points
+      const amplitude = 15; // Zigzag height (how far it goes up/down)
+
+      // Calculate increments per segment
+      let dx = (x2 - x1) / segments;
+      let dy = (y2 - y1) / segments;
+
+      let path = `M${x1} ${y1}`;
+
+      for (let i = 1; i <= segments; i++) {
+        // Alternate offset up and down on a direction perpendicular to the line
+
+        // Find the unit vector along the line
+        let length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+        let ux = (x2 - x1) / length;
+        let uy = (y2 - y1) / length;
+
+        // Find perpendicular vector (rotated 90 degrees)
+        let px = -uy;
+        let py = ux;
+
+        // Alternate sign of offset to create zigzag effect
+        let sign = i % 2 === 0 ? 1 : -1;
+
+        // Calculate zigzag point position
+        let x = x1 + dx * i + px * amplitude * sign;
+        let y = y1 + dy * i + py * amplitude * sign;
+
+        path += ` L${x} ${y}`;
+      }
+
+      return path;
+    }
+
+    // Default straight line
+    return `M${x1} ${y1} L${x2} ${y2}`;
   }
+
+  // constructPathForSite(x1: number, y1: number, x2: number, y2: number) {
+  //   let pathD: string = `M${x1 + 10} ${y1 - 5} L${x2 + 10} ${y2 - 5}`;
+  //   return pathD;
+  // }
 
   public dragOperationTypes: typeof DragOperationTypes = DragOperationTypes;
   // selectedElement!: HTMLElement | any;
