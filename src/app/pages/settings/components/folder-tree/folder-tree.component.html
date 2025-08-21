@@ -1,0 +1,22 @@
+<div class="folder-tree">
+  <button (click)="startCreatingFolder()">+ New Folder</button>
+
+  <!-- New folder input -->
+  <div *ngIf="isCreating">
+    <input
+      #newFolderInput
+      [(ngModel)]="newFolderName"
+      (keydown.enter)="saveFolder()"
+      (blur)="cancelFolder()"
+      placeholder="Enter folder name"
+    />
+  </div>
+
+  <ul>
+    <app-folder-item
+      *ngFor="let folder of folders"
+      [folder]="folder"
+      [folderList]="folders"
+    ></app-folder-item>
+  </ul>
+</div>

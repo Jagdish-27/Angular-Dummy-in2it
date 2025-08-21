@@ -1,0 +1,47 @@
+<li class="folder-item">
+  <!-- Edit Mode -->
+  <div *ngIf="folder.isEditing; else normalFolder">
+    <input [(ngModel)]="newFolderName" (keydown.enter)="saveEdit()" />
+    <button (click)="saveEdit()">✔️</button>
+    <button (click)="cancelEdit()">❌</button>
+  </div>
+
+  <!-- Normal View -->
+  <ng-template #normalFolder>
+    <div class="folder-header" (click)="toggleFolder()">
+      {{ folder.isOpen ? "📂" : "📁" }} {{ folder.name }}
+    </div>
+    <button (click)="addChildFolder(); $event.stopPropagation()">
+      +Subfolder
+    </button>
+    <button (click)="editFolder(); $event.stopPropagation()">✏️</button>
+    <button
+      (click)="deleteFolder(folderList, folder); $event.stopPropagation()"
+    >
+      🗑️
+    </button>
+  </ng-template>
+
+  <!-- Create Child Folder Input -->
+  <div *ngIf="folder.isCreatingChild">
+    <input
+      #newFolderInput
+      [(ngModel)]="newFolderName"
+      (keydown.enter)="saveChildFolder()"
+      (blur)="cancelChildFolder()"
+    />
+  </div>
+
+  <!-- Show Items and Children -->
+  <ul *ngIf="folder.isOpen">
+    <!-- Optional: Show items -->
+    <li *ngFor="let item of folder.items">📄 {{ item }}</li>
+
+    <!-- Recursive Children -->
+    <app-folder-item
+      *ngFor="let child of folder.children"
+      [folder]="child"
+      [folderList]="folder.children"
+    ></app-folder-item>
+  </ul>
+</li>

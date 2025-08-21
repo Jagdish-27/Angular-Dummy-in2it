@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-organization-settings',
   templateUrl: './organization-settings.component.html',
-  styleUrls: ['./organization-settings.component.css']
+  styleUrls: ['./organization-settings.component.css'],
 })
 export class OrganizationSettingsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
