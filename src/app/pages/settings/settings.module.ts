@@ -7,6 +7,7 @@ import { OrganizationSettingsComponent } from './components/organization-setting
 import { FolderTreeComponent } from './components/folder-tree/folder-tree.component';
 import { FolderItemComponent } from './components/folder-item/folder-item.component';
 import { FormsModule } from '@angular/forms';
+import { VisNetworkComponent } from './components/vis-network/vis-network.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     OrganizationSettingsComponent,
     FolderTreeComponent,
     FolderItemComponent,
+    VisNetworkComponent,
   ],
   imports: [CommonModule, SettingsRoutingModule, FormsModule],
 })

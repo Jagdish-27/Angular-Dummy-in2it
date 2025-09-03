@@ -21,10 +21,6 @@
     "@angular/router": "~13.2.0",
     "@ng-bootstrap/ng-bootstrap": "^12.1.0",
     "@popperjs/core": "^2.11.8",
-     "sweetalert2": "^11.4.0",
-    "ngx-spinner": "^13.1.1",
-    "ng-multiselect-dropdown": "^0.22.11",
-
     "ag-grid-angular": "^28.1.1",
     "ag-grid-community": "^28.1.1",
     "angular-calendar": "^0.29.0",
@@ -32,10 +28,14 @@
     "angular-remix-icon": "^5.1.0",
     "bootstrap": "^5.3.3",
     "date-fns": "^3.6.0",
+    "ng-multiselect-dropdown": "^0.22.11",
     "ng-wizard": "^1.0.0",
+    "ngx-spinner": "^13.1.1",
     "remixicon": "^4.3.0",
     "rxjs": "~7.5.0",
+    "sweetalert2": "^11.4.0",
     "tslib": "^2.3.0",
+    "vis": "^4.21.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -44,6 +44,7 @@
     "@angular/compiler-cli": "~13.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "@types/vis": "^4.21.27",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
