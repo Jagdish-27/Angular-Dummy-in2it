@@ -36,6 +36,7 @@ import { TimeAgoDirective } from './directives/time-ago.directive';
 import { CopyToClipboardDirective } from './directives/copy-to-clipboard.directive';
 import { MaskedInputPipe } from './pipes/masked-input.pipe';
 import { SkipTestPipe } from './pipes/skip-test.pipe';
+import { DiffHighlightPipe } from 'src/app/pipes/diff-highlight.pipe';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { SkipTestPipe } from './pipes/skip-test.pipe';
     CopyToClipboardDirective,
     MaskedInputPipe,
     SkipTestPipe,
+    DiffHighlightPipe,
   ],
   imports: [
     CommonModule,
@@ -98,6 +100,7 @@ import { SkipTestPipe } from './pipes/skip-test.pipe';
     TimeAgoDirective,
     CopyToClipboardDirective,
     MaskedInputPipe,
+    DiffHighlightPipe,
   ],
 })
 export class SharedModule {}

@@ -1,1 +1,167 @@
-<p>schedule-list works!</p>
+<div class="compare-container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Current Information</th>
+        <th>Previous Information</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        *ngFor="let field of fields"
+        [ngClass]="{
+          'row-diff': isDifferent(field.key),
+          'row-missing': isMissing(field.key)
+        }"
+      >
+        <td>{{ field.label }}</td>
+
+        <!-- Current Column (inline highlight) -->
+        <td [innerHTML]="currentInfo[field.key] || '-'"></td>
+        <td
+          [innerHTML]="
+            (previousInfo[field.key]
+              | diffHighlight : currentInfo[field.key]) || '-'
+          "
+        ></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- for the table component -->
+
+<div class="iface-container">
+  <div class="iface-header master-header">
+    <!-- Select All checkbox -->
+    <input
+      type="checkbox"
+      [checked]="allChecked"
+      (change)="checkAndUncheckAll()"
+    />
+
+    <span (click)="checkAndUncheckAll()" class="master-label">Select All</span>
+
+    <button [class.disable]="!allChecked" (click)="expandAll()" class="btn">
+      Expand All
+    </button>
+    <button
+      [class.disable]="!isAccordianOpen"
+      (click)="retrackAll()"
+      class="btn"
+    >
+      Retrack All
+    </button>
+  </div>
+
+  <div class="iface-row" *ngFor="let row of paginatedRows">
+    <div class="iface-header">
+      <span
+        (click)="toggle(row)"
+        class="arrow"
+        [class.disable]="!row.isChangedOrMissing"
+      >
+        {{ row.expanded ? "▾" : "▸" }}
+      </span>
+
+      <!-- Individual row checkbox -->
+      <input
+        type="checkbox"
+        [checked]="row.isChecked"
+        (change)="onCheckboxChange(row, $event)"
+      />
+
+      {{ row.name }}
+    </div>
+
+    <!-- DETAILS -->
+    <div class="iface-details" *ngIf="row.expanded">
+      <div class="detail-row" *ngFor="let field of row.fieldArray">
+        <div class="label">{{ field.key }}</div>
+
+        <div
+          [ngClass]="{
+            missing: isMissingVal(field),
+            changed: isChanged(field)
+          }"
+          class="previous-value"
+        >
+          {{ field.previous || "-" }}
+        </div>
+
+        <div
+          class="current-value"
+          [ngClass]="{
+            missing: isMissingVal(field),
+            changed: isChanged(field)
+          }"
+        >
+          {{ field.current || "-" }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination part here -->
+
+<div class="pagination-container">
+  <!-- Rows per page dropdown -->
+  <div class="rows-control">
+    <label>Show</label>
+
+    <select (change)="onPageSizeChange($event)">
+      <option
+        *ngFor="let size of [5, 10, 25, 50, 100]"
+        [value]="size"
+        [selected]="size === pageSize"
+      >
+        {{ size }}
+      </option>
+    </select>
+
+    <span
+      >Rows | {{ (currentPage - 1) * pageSize + 1 }} -
+      {{ getMin(currentPage, pageSize, totalRows) }}
+      of {{ totalRows }} Entries
+    </span>
+  </div>
+
+  <!-- Page Navigation (with input box like your screenshot) -->
+  <div class="page-nav clean-style">
+    <span class="label">Page</span>
+
+    <!-- Previous arrow -->
+    <button
+      class="nav-btn"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1"
+    >
+      ‹
+    </button>
+
+    <!-- INPUT FIELD for page number -->
+    <input
+      class="page-input"
+      type="number"
+      [value]="currentPage"
+      (keyup.enter)="jumpToPage($event)"
+      (blur)="jumpToPage($event)"
+      min="1"
+      [max]="totalPages"
+    />
+
+    <!-- Next arrow -->
+    <button
+      class="nav-btn"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+    >
+      ›
+    </button>
+
+    <span class="label">of {{ totalPages }}</span>
+  </div>
+</div>
