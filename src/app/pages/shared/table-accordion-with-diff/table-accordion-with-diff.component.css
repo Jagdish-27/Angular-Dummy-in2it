@@ -1,0 +1,208 @@
+/* Interface CSS dropdown */
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+thead th:first-child,
+tbody td:first-child {
+    width: 208px;
+    max-width: 208px;
+    min-width: 208px;
+    white-space: nowrap;
+}
+
+.disable {
+    pointer-events: none;
+    color: #a1a1a1 !important;
+}
+
+.interface_dropdown .dropdown-menu.show {
+    display: block;
+    background-color: #fff !important;
+    box-shadow: 0 0 1rem #00000045 !important;
+    border-radius: 0.5vw !important;
+    top: 1.5vw !important;
+    left: -15.85vw !important;
+    transform: translate(21.439vw, 1.55vh) !important;
+}
+
+.interface_dropdown .dropdown-menu.show .dropdown-item {
+    gap: 0.4vw;
+    font-size: var(--fs-lg) !important;
+    font-weight: 400 !important;
+}
+
+.table-header-bg {
+    background: #929292;
+    color: #ffffff;
+    font-size: var(--fs-md);
+}
+
+.h-30px {
+    height: 18.32px !important;
+}
+
+
+.title-custom {
+    font-size: var(--fs-lg);
+    color: #262a41;
+}
+
+.td-color {
+    color: #262a41;
+    font-weight: 400;
+}
+
+.scrl {
+    height: calc(100vh - 21vmax);
+    max-height: calc(100vh - 21vmax);
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 0px;
+    border: 1px solid #bfbbbb;
+}
+
+:host::ng-deep.card {
+    border-radius: 0px !important;
+    /* border: unset; */
+}
+
+:host::ng-deep.card-header {
+    border-bottom: 0px solid #bfbbbb !important;
+    background: transparent;
+}
+
+.new_table {
+    min-height: calc(100vh - 20vmax);
+    max-height: calc(100vh - 20vmax);
+}
+
+.new_table tr {
+    border-bottom: 0px solid #bfbbbb;
+}
+
+.new_table .card {
+    box-shadow: 0px 0px 0px 0px #0000000a;
+}
+
+.new_table .table td,
+th {
+    padding: 0.538rem;
+}
+
+.new_table .p-custom {
+    padding: 5px 0px 5px 10px;
+}
+
+.new_table .table> :not(caption)>*>* {
+    border-bottom-width: 0.5px !important;
+}
+
+.new_table .table {
+    border: 0px solid #e4e4e4;
+}
+
+.new_table .table .table-bordered {
+    border-bottom: 0px solid #e4e4e4;
+}
+
+.new_table thead th:first-child,
+.new_table tbody td:first-child {
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.new_table .table_active {
+    background: #F5F5FF;
+    border-width: 0px, 0px, 1px, 1px;
+    border-style: solid;
+    border-color: #8F59BC;
+}
+
+.bg-light {
+    background: #fee0e6 !important;
+}
+
+.bg-yellow {
+    background: #fff0d8 !important;
+}
+
+.fs-10px {
+    font-size: 0.8vw !important;
+}
+
+.pagination-icon {
+    padding: 0vmax 0vmax;
+    color: #2680eb;
+    text-align: center !important;
+    width: 1.163vmax;
+    height: 1.308vmax;
+    background: #f5f6f7 0% 0% no-repeat padding-box;
+    border: 0.036vmax solid #e4e4e4;
+    border-radius: 0.145vmax;
+}
+
+li.previous a .feather_icon_12 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+li.next a {
+    border: 0.036vmax solid #e4e4e4;
+    height: 1.308vmax;
+    width: 1.163vmax;
+}
+
+li.next a .feather_icon_12 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feather_icon_12 {
+    width: 0.945vmax;
+    height: 0.872vmax;
+}
+
+.ms-6 {
+    margin-left: 32%;
+}
+
+.btn_icon {
+    width: 0.945vw !important;
+    height: 0.654vmax !important;
+    font-size: 0.727vw;
+    color: #a3a3a3;
+}
+
+.icon_blue {
+    color: #2680eb !important;
+}
+
+a.set_default {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    font-size: 0.727vw;
+    line-height: 0.872vmax;
+}
+
+::ng-deep.t-dropdown-select {
+    width: 95% !important;
+}
+
+::ng-deep.form-control-sm {
+    font-size: var(--fs-md) !important;
+}
+
+.pagination-input {
+    height: 1.3vmax;
+    border: 0.073vmax solid #afafaf;
+    text-align: center !important;
+    width: 3.2vw;
+    border-radius: 0.3vw;
+    outline: none;
+}

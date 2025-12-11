@@ -37,6 +37,7 @@ import { CopyToClipboardDirective } from './directives/copy-to-clipboard.directi
 import { MaskedInputPipe } from './pipes/masked-input.pipe';
 import { SkipTestPipe } from './pipes/skip-test.pipe';
 import { DiffHighlightPipe } from 'src/app/pipes/diff-highlight.pipe';
+import { TableAccordionWithDiffComponent } from './table-accordion-with-diff/table-accordion-with-diff.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { DiffHighlightPipe } from 'src/app/pipes/diff-highlight.pipe';
     MaskedInputPipe,
     SkipTestPipe,
     DiffHighlightPipe,
+    TableAccordionWithDiffComponent,
   ],
   imports: [
     CommonModule,

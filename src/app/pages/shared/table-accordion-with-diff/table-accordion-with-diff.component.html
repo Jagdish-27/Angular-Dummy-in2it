@@ -1,0 +1,237 @@
+<div
+  class="d-flex align-items-center justify-content-between custom-margin-bottom"
+>
+  <h5 class="custom-title mb-0">Interface List</h5>
+  <div class="search_box float-end mb-0 interface_dropdown" ngbDropdown>
+    <div class="posi">
+      <input type="text" placeholder="Search by Template" />
+      <span><i-feather name="search" class="search_feather"></i-feather></span>
+    </div>
+    <a>
+      <i-feather name="eye" class="search_feather"></i-feather>
+    </a>
+    <a id="dropdownBasic1" ngbDropdownToggle>
+      <i-feather name="more-horizontal" class="search_feather"></i-feather>
+    </a>
+    <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <a class="dropdown-item disable align-items-center"
+        ><i-feather
+          name="plus-circle"
+          class="btn-icon m-0 d-flex align-items-center"
+        ></i-feather>
+        Reconcile</a
+      >
+      <a
+        [class.disable]="!allChecked"
+        (click)="expandAll()"
+        class="dropdown-item align-items-center"
+        ><i-feather
+          name="plus-circle"
+          class="btn-icon m-0 d-flex align-items-center"
+        ></i-feather>
+        Expand All</a
+      >
+      <a
+        [class.disable]="!isAccordianOpen"
+        (click)="retrackAll()"
+        class="dropdown-item align-items-center"
+        ><i-feather
+          name="plus-circle"
+          class="btn-icon m-0 d-flex align-items-center"
+        ></i-feather>
+        Retract All</a
+      >
+    </div>
+  </div>
+</div>
+<div class="new_table scrl">
+  <div class="table table-responsive-sm">
+    <table class="table table-bordered mb-0">
+      <thead>
+        <tr class="table-header-bg">
+          <th nowrap class="text-white">
+            <input
+              class="form-check-input ms-6"
+              [checked]="allChecked"
+              (change)="checkAndUncheckAll()"
+              type="checkbox"
+              id="inlineCheckbox1"
+              value="option1"
+            />
+          </th>
+          <th
+            *ngFor="let headCol of iFaceCustomTableHeaders"
+            nowrap
+            class="text-white"
+          >
+            {{ headCol }}
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="interfaces.length">
+        <tr *ngFor="let iface of interfaces">
+          <td colspan="12" class="p-custom py-0">
+            <table class="p-0">
+              <tr>
+                <td class="p-0">
+                  <button
+                    class="btn btn-xs px-0 border-0"
+                    [attr.aria-expanded]="!iface.expanded"
+                    aria-controls="collapseExample"
+                  >
+                    <i-feather
+                      [class.disable]="!iface.isChangedOrMissing"
+                      (click)="toggle(iface)"
+                      [name]="'chevron-' + (!iface.expanded ? 'right' : 'down')"
+                    >
+                    </i-feather>
+                    <span class="ms-4 td-color">
+                      <input
+                        [checked]="iface.isChecked"
+                        (change)="onCheckboxChange(iface, $event)"
+                        class="form-check-input"
+                        type="checkbox"
+                        id="inlineCheckbox1"
+                        value="option1"
+                      />
+                    </span>
+                  </button>
+                </td>
+                <td>{{ iface.name }}</td>
+                <td colspan="10"></td>
+              </tr>
+              <tr *ngIf="iface.expanded">
+                <td colspan="12" class="py-0">
+                  <!-- #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" -->
+                  <div>
+                    <div class="card p-0 border-0">
+                      <div class="card-body p-0">
+                        <div class="tab-wrapper">
+                          <table class="table table-responsive mb-0">
+                            <tr *ngIf="iface.cmdb">
+                              <td></td>
+                              <td></td>
+                              <td
+                                *ngFor="let col of columnsOfInterfaces"
+                                [ngClass]="
+                                  getTdClass(iface.cmdb[col], iface.snmp[col])
+                                "
+                              >
+                                {{ iface.cmdb[col] || "-" }}
+                              </td>
+                            </tr>
+
+                            <tr *ngIf="iface.snmp">
+                              <td></td>
+                              <td></td>
+                              <td
+                                *ngFor="let col of columnsOfInterfaces"
+                                [ngClass]="
+                                  getTdClass(iface.cmdb[col], iface.snmp[col])
+                                "
+                              >
+                                {{ iface.snmp[col] || "-" }}
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+      <div class="no-data-found" *ngIf="!interfaces.length">
+        No Data To Show
+      </div>
+    </table>
+  </div>
+  <div class="d-flex">
+    <div class="col mt-2 mb-2">
+      <div class="dataTables_length mb-2" id="data-table-default_length">
+        <label class="me-2 fs-10px ps-0"
+          >Show
+          <select
+            class="select_box pagination-input mx-1"
+            [(ngModel)]="paginationPageSize"
+            (change)="selectPageCounts($event.target)"
+          >
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          Rows | {{ min }}-{{ (max > totalCount && totalCount) || max }} of
+          {{ totalCount || 0 }} Entries
+        </label>
+      </div>
+    </div>
+    <div class="col">
+      <div
+        class="dataTables_paginate paging_simple_numbers mt-2 mb-2"
+        id="data-table-default_paginate"
+      >
+        <ul class="align-items-center d-flex float-end fw-500 pagination">
+          <li class="fs-10px">Page</li>
+          <li
+            class="paginate_button page-item previous me-2"
+            id="data-table-default_previous"
+            [ngClass]="modPagination.currentPage > 1 ? 'bg-white' : 'disabled'"
+          >
+            <a
+              aria-controls="data-table-default"
+              data-dt-idx="0"
+              tabindex="0"
+              (click)="onBtPrevious()"
+              class="page-link text_link pagination-icon"
+            >
+              <i-feather
+                name="chevron-left"
+                class="feather_icon_12"
+              ></i-feather>
+            </a>
+          </li>
+          <li
+            class="paginate_button page-item"
+            [ngClass]="modPagination.currentPage == 1 ? 'active' : 'disabled'"
+          >
+            <input
+              type="tel"
+              class="pagination-input"
+              (change)="toSelectedPage($event)"
+              [(ngModel)]="modPagination.currentPage"
+            />
+          </li>
+
+          <li
+            class="paginate_button page-item next me-2"
+            id="data-table-default_next"
+            [ngClass]="
+              modPagination.totalPages &&
+              !(modPagination.currentPage == modPagination.totalPages)
+                ? 'bg-white'
+                : 'disabled'
+            "
+          >
+            <a
+              aria-controls="data-table-default"
+              data-dt-idx="7"
+              tabindex="0"
+              class="page-link text_link pagination-icon"
+            >
+              <i-feather
+                name="chevron-right"
+                (click)="onBtNext()"
+                class="feather_icon_12"
+              ></i-feather>
+            </a>
+          </li>
+          <li class="fs-10px">of {{ modPagination.totalPages || 1 }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
